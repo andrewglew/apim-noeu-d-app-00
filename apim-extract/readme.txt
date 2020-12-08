@@ -1,0 +1,1 @@
+--Use linked templates against a public gitHub Repository.--
