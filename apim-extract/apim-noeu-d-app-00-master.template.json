@@ -75,6 +75,9 @@
           "ApimServiceName": {
             "value": "[parameters('ApimServiceName')]"
           },
+          "LinkedTemplatesBaseUrl": {
+            "value": "[parameters('LinkedTemplatesBaseUrl')]"
+          },
           "PolicyXMLBaseUrl": {
             "value": "[parameters('PolicyXMLBaseUrl')]"
           }
