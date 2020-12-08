@@ -29,7 +29,7 @@
           }
         }
       },
-      "name": "apisTemplate",
+      "name": "echo-apiTemplate",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2018-05-01",
       "dependsOn": [
@@ -55,7 +55,7 @@
           }
         }
       },
-      "name": "apisTemplate",
+      "name": "vpsolutionsTemplate",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2018-05-01",
       "dependsOn": [
