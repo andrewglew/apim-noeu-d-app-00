@@ -7,6 +7,9 @@
         },
         "PolicyXMLBaseUrl": {
             "type": "string"
+        },
+        "KeyvaultName": {
+            "type": "string"
         }
     },
     "resources": [
