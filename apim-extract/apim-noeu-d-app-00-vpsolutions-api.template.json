@@ -1,0 +1,120 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "ApimServiceName": {
+            "type": "string"
+        },
+        "PolicyXMLBaseUrl": {
+            "type": "string"
+        }
+    },
+    "resources": [
+        {
+            "properties": {
+                    "description": "",
+                    "authenticationSettings": {
+                    "subscriptionKeyRequired": false
+                },
+                "subscriptionKeyParameterNames": {
+                    "header": "Ocp-Apim-Subscription-Key",
+                    "query": "subscription-key"
+                },
+                "apiRevision": "1",
+                "isCurrent": true,
+                "subscriptionRequired": true,
+                "displayName": "VPSolutions",
+                "serviceUrl": "https://performance.vpsolutions.dk",
+                "path": "vps",
+                "protocols": [
+                    "https"
+                ]
+            },
+            "name": "[concat(parameters('ApimServiceName'), '/vpsolutions')]",
+            "type": "Microsoft.ApiManagement/service/apis",
+            "apiVersion": "2019-01-01",
+            "dependsOn": []
+        },
+        {
+            "properties": {
+                "templateParameters": [
+                    {
+                        "name": "imoNumber",
+                        "type": "",
+                        "required": true,
+                        "values": []
+                    }
+                ],
+                "description": "Return Fuel Tables result for vessel",
+                "request": {
+                "description": "parameters needed",
+                "queryParameters": [],
+                "headers": [
+                    {
+                        "name": "Content-Type",
+                        "description": "Request Body Content Type",
+                        "type": "string",
+                        "defaultValue": "application/json",
+                        "required": true,
+                        "values": [
+                            "application/json"
+                        ]
+                    }
+                ],
+                "representations": [
+                    {
+                    "contentType": "application/json",
+                    "sample": "{\n  \"addedResistance\": 0,\n  \"dataFilters\": {\n    \"applyAddedResistanceFilter\": false,\n    \"applyLogFactorFilter\": false,\n    \"applyLoggedThroughWaterSpeedFilter\": false,\n    \"applyObservedOverGroundSpeedFilter\": true,\n    \"applyPowerFilterOnFuelConsumption\": true,\n    \"applyPowerFilterOnTorsionMeter\": false,\n    \"includeBallastDraft\": true,\n    \"includeLoadedDraft\": true,\n    \"logFactorThreshold\": 10,\n    \"maxAddedResistance\": 120,\n    \"maxBeaufort\": 5,\n    \"maxSpeed\": 30,\n    \"minAddedResistance\": -20,\n    \"minPower\": 10,\n    \"minReportDuration\": 10,\n    \"minSpeed\": 8\n  },\n  \"draftStep\": 1,\n  \"engineCalibration\": 3,\n  \"evaluationType\": \"UserSavedAssessment\",\n  \"minReportAmount\": 7,\n  \"outputBeaufortNumbers\": [\n    4\n  ],\n  \"outputFormat\": \"Table\",\n  \"performanceIndicator\": \"SOGAndFuelConsumption\",\n  \"selectedReportTypes\": [\n    \"Sea\",\n    \"EndOfSeaPassage\"\n  ],\n  \"speedStep\": 0.5,\n  \"trendEvaluationType\": \"PRateLine\",\n  \"trimStep\": 1,\n  \"trustedLevel\": \"High\",\n  \"useMinReportAmount\": false,\n  \"useOnlyEvenKeel\": true,\n  \"useOnlyLoadedAndBallastDraft\": true,\n  \"userSelectedEvaluationDate\": \"2020-11-06T06:13:09.5024341Z\",\n  \"weatherSource\": \"Vessel\",\n  \"windWaveDirection\": \"AllDirections\"\n}"
+                    }
+                ]
+                },
+                "responses": [
+                    {
+                        "statusCode": 200,
+                        "description": "Fuel Tables for specific vessel",
+                        "headers": [],
+                        "representations": [
+                            {
+                                "contentType": "application/json",
+                                "sample": "{\n  \"vessel\": {\n    \"imoNumber\": \"9587831\",\n    \"name\": \"Agena\",\n    \"id\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"fuelTableItems\": [\n    {\n      \"power\": 1493.1504848109998,\n      \"propulsionFuelConsumption\": 7.7438698025756425,\n      \"auxEngineConsumption\": 3.2,\n      \"boilerEngineConsumption\": 1.3,\n      \"totalFuelConsumption\": 12.243869802575643,\n      \"rpm\": null,\n      \"speed\": 9,\n      \"draught\": 7,\n      \"trim\": 0,\n      \"beaufort\": 4\n    },\n    {\n      \"power\": 1795.444793959687,\n      \"propulsionFuelConsumption\": 9.241015551991742,\n      \"auxEngineConsumption\": 3.2,\n      \"boilerEngineConsumption\": 1.1662207490138081,\n      \"totalFuelConsumption\": 13.607236301005551,\n      \"rpm\": null,\n      \"speed\": 9.5,\n      \"draught\": 7,\n      \"trim\": 0,\n      \"beaufort\": 4\n    },\n    {\n      \"power\": 2104.4097120889232,\n      \"propulsionFuelConsumption\": 10.739003246071787,\n      \"auxEngineConsumption\": 3.2,\n      \"boilerEngineConsumption\": 0.9812395078048655,\n      \"totalFuelConsumption\": 14.920242753876654,\n      \"rpm\": null,\n      \"speed\": 10,\n      \"draught\": 7,\n      \"trim\": 0,\n      \"beaufort\": 4\n    },\n    {\n      \"power\": 2425.244557642532,\n      \"propulsionFuelConsumption\": 12.258820532333116,\n      \"auxEngineConsumption\": 3.2,\n      \"boilerEngineConsumption\": 0.7891515894970622,\n      \"totalFuelConsumption\": 16.24797212183018,\n      \"rpm\": null,\n      \"speed\": 10.5,\n      \"draught\": 7,\n      \"trim\": 0,\n      \"beaufort\": 4\n    },\n    {\n      \"power\": 2738.971189490334,\n      \"propulsionFuelConsumption\": 13.731703815406188,\n      \"auxEngineConsumption\": 3.2,\n      \"boilerEngineConsumption\": 0.6013194494893974,\n      \"totalFuelConsumption\": 17.533023264895586,\n      \"rpm\": null,\n      \"speed\": 11,\n      \"draught\": 7,\n      \"trim\": 0,\n      \"beaufort\": 4\n    },\n    {\n      \"power\": 3080.5113719436204,\n      \"propulsionFuelConsumption\": 15.30576085896765,\n      \"auxEngineConsumption\": 2.8,\n      \"boilerEngineConsumption\": 0,\n      \"totalFuelConsumption\": 18.10576085896765,\n      \"rpm\": null,\n      \"speed\": 11.5,\n      \"draught\": 7,\n      \"trim\": 0,\n      \"beaufort\": 4\n    },\n    {\n      \"power\": 3470.4421876091374,\n      \"propulsionFuelConsumption\": 17.065360241675076,\n      \"auxEngineConsumption\": 2.8,\n      \"boilerEngineConsumption\": 0,\n      \"totalFuelConsumption\": 19.865360241675077,\n      \"rpm\": null,\n      \"speed\": 12,\n      \"draught\": 7,\n      \"trim\": 0,\n      \"beaufort\": 4\n    },\n    {\n      \"power\": 3894.3867380333563,\n      \"propulsionFuelConsumption\": 18.933114974312335,\n      \"auxEngineConsumption\": 2.8,\n      \"boilerEngineConsumption\": 0,\n      \"totalFuelConsumption\": 21.733114974312336,\n      \"rpm\": null,\n      \"speed\": 12.5,\n      \"draught\": 7,\n      \"trim\": 0,\n      \"beaufort\": 4\n    },\n    {\n      \"power\": 4377.402747139482,\n      \"propulsionFuelConsumption\": 21.133635832415706,\n      \"auxEngineConsumption\": 2.8,\n      \"boilerEngineConsumption\": 0,\n      \"totalFuelConsumption\": 23.933635832415707,\n      \"rpm\": null,\n      \"speed\": 13,\n      \"draught\": 7,\n      \"trim\": 0,\n      \"beaufort\": 4\n    },\n    {\n      \"power\": 4920.247359047554,\n      \"propulsionFuelConsumption\": 23.580893640588403,\n      \"auxEngineConsumption\": 2.8,\n      \"boilerEngineConsumption\": 0,\n      \"totalFuelConsumption\": 26.380893640588404,\n      \"rpm\": null,\n      \"speed\": 13.5,\n      \"draught\": 7,\n      \"trim\": 0,\n      \"beaufort\": 4\n    },\n    {\n      \"power\": 5532.532083500036,\n      \"propulsionFuelConsumption\": 26.29524875974617,\n      \"auxEngineConsumption\": 2.8,\n      \"boilerEngineConsumption\": 0,\n      \"totalFuelConsumption\": 29.09524875974617,\n      \"rpm\": null,\n      \"speed\": 14,\n      \"draught\": 7,\n      \"trim\": 0,\n      \"beaufort\": 4\n    },\n    {\n      \"power\": 6225.864158386311,\n      \"propulsionFuelConsumption\": 29.453851700467705,\n      \"auxEngineConsumption\": 2.8,\n      \"boilerEngineConsumption\": 0,\n      \"totalFuelConsumption\": 32.253851700467706,\n      \"rpm\": null,\n      \"speed\": 14.5,\n      \"draught\": 7,\n      \"trim\": 0,\n      \"beaufort\": 4\n    },\n    {\n      \"power\": 7011.479517372728,\n      \"propulsionFuelConsumption\": 33.19705735924845,\n      \"auxEngineConsumption\": 2.8,\n      \"boilerEngineConsumption\": 0,\n      \"totalFuelConsumption\": 35.997057359248444,\n      \"rpm\": null,\n      \"speed\": 15,\n      \"draught\": 7,\n      \"trim\": 0,\n      \"beaufort\": 4\n    },\n    {\n      \"power\": 2218.7615622291687,\n      \"propulsionFuelConsumption\": 11.282945477605011,\n      \"auxEngineConsumption\": 3.2,\n      \"boilerEngineConsumption\": 0.9127755951329628,\n      \"totalFuelConsumption\": 15.395721072737974,\n      \"rpm\": null,\n      \"speed\": 9,\n      \"draught\": 11,\n      \"trim\": 0,\n      \"beaufort\": 4\n    },\n    {\n      \"power\": 2519.6176370861517,\n      \"propulsionFuelConsumption\": 12.704603042822011,\n      \"auxEngineConsumption\": 3.2,\n      \"boilerEngineConsumption\": 0.7326492219211787,\n      \"totalFuelConsumption\": 16.63725226474319,\n      \"rpm\": null,\n      \"speed\": 9.5,\n      \"draught\": 11,\n      \"trim\": 0,\n      \"beaufort\": 4\n    },\n    {\n      \"power\": 2828.6427569610933,\n      \"propulsionFuelConsumption\": 14.14794090025504,\n      \"auxEngineConsumption\": 3.2,\n      \"boilerEngineConsumption\": 0.5476319371584536,\n      \"totalFuelConsumption\": 17.895572837413493,\n      \"rpm\": null,\n      \"speed\": 10,\n      \"draught\": 11,\n      \"trim\": 0,\n      \"beaufort\": 4\n    },\n    {\n      \"power\": 3147.240792960654,\n      \"propulsionFuelConsumption\": 15.609717341459318,\n      \"auxEngineConsumption\": 2.8,\n      \"boilerEngineConsumption\": 0,\n      \"totalFuelConsumption\": 18.409717341459316,\n      \"rpm\": null,\n      \"speed\": 10.5,\n      \"draught\": 11,\n      \"trim\": 0,\n      \"beaufort\": 4\n    },\n    {\n      \"power\": 3472.0801504966357,\n      \"propulsionFuelConsumption\": 17.072667432067604,\n      \"auxEngineConsumption\": 2.8,\n      \"boilerEngineConsumption\": 0,\n      \"totalFuelConsumption\": 19.872667432067605,\n      \"rpm\": null,\n      \"speed\": 11,\n      \"draught\": 11,\n      \"trim\": 0,\n      \"beaufort\": 4\n    },\n    {\n      \"power\": 3811.527022452511,\n      \"propulsionFuelConsumption\": 18.57177679091581,\n      \"auxEngineConsumption\": 2.8,\n      \"boilerEngineConsumption\": 0,\n      \"totalFuelConsumption\": 21.37177679091581,\n      \"rpm\": null,\n      \"speed\": 11.5,\n      \"draught\": 11,\n      \"trim\": 0,\n      \"beaufort\": 4\n    },\n    {\n      \"power\": 4201.426217508653,\n      \"propulsionFuelConsumption\": 20.33207778069686,\n      \"auxEngineConsumption\": 2.8,\n      \"boilerEngineConsumption\": 0,\n      \"totalFuelConsumption\": 23.13207778069686,\n      \"rpm\": null,\n      \"speed\": 12,\n      \"draught\": 11,\n      \"trim\": 0,\n      \"beaufort\": 4\n    },\n    {\n      \"power\": 4610.510976934495,\n      \"propulsionFuelConsumption\": 22.189228002108283,\n      \"auxEngineConsumption\": 2.8,\n      \"boilerEngineConsumption\": 0,\n      \"totalFuelConsumption\": 24.989228002108284,\n      \"rpm\": null,\n      \"speed\": 12.5,\n      \"draught\": 11,\n      \"trim\": 0,\n      \"beaufort\": 4\n    },\n    {\n      \"power\": 5083.779017004975,\n      \"propulsionFuelConsumption\": 24.310623436624386,\n      \"auxEngineConsumption\": 2.8,\n      \"boilerEngineConsumption\": 0,\n      \"totalFuelConsumption\": 27.110623436624387,\n      \"rpm\": null,\n      \"speed\": 13,\n      \"draught\": 11,\n      \"trim\": 0,\n      \"beaufort\": 4\n    },\n    {\n      \"power\": 5615.652579604042,\n      \"propulsionFuelConsumption\": 26.659979480510042,\n      \"auxEngineConsumption\": 2.8,\n      \"boilerEngineConsumption\": 0,\n      \"totalFuelConsumption\": 29.459979480510043,\n      \"rpm\": null,\n      \"speed\": 13.5,\n      \"draught\": 11,\n      \"trim\": 0,\n      \"beaufort\": 4\n    },\n    {\n      \"power\": 6225.15806882444,\n      \"propulsionFuelConsumption\": 29.45049008580466,\n      \"auxEngineConsumption\": 2.8,\n      \"boilerEngineConsumption\": 0,\n      \"totalFuelConsumption\": 32.25049008580466,\n      \"rpm\": null,\n      \"speed\": 14,\n      \"draught\": 11,\n      \"trim\": 0,\n      \"beaufort\": 4\n    },\n    {\n      \"power\": 6937.079315589419,\n      \"propulsionFuelConsumption\": 32.84230917898863,\n      \"auxEngineConsumption\": 2.8,\n      \"boilerEngineConsumption\": 0,\n      \"totalFuelConsumption\": 35.642309178988626,\n      \"rpm\": null,\n      \"speed\": 14.5,\n      \"draught\": 11,\n      \"trim\": 0,\n      \"beaufort\": 4\n    },\n    {\n      \"power\": null,\n      \"propulsionFuelConsumption\": null,\n      \"auxEngineConsumption\": null,\n      \"boilerEngineConsumption\": null,\n      \"totalFuelConsumption\": null,\n      \"rpm\": null,\n      \"speed\": 15,\n      \"draught\": 11,\n      \"trim\": 0,\n      \"beaufort\": 4\n    }\n  ],\n  \"speedsAtNCR\": [\n    {\n      \"speed\": 15.033897270019864,\n      \"draught\": 7,\n      \"trim\": 0,\n      \"beaufort\": 4\n    },\n    {\n      \"speed\": 14.581123226079956,\n      \"draught\": 11,\n      \"trim\": 0,\n      \"beaufort\": 4\n    }\n  ],\n  \"auxEngineIdle\": 2.29824,\n  \"boilerIdle\": 1.3,\n  \"speeds\": [\n    9,\n    9.5,\n    10,\n    10.5,\n    11,\n    11.5,\n    12,\n    12.5,\n    13,\n    13.5,\n    14,\n    14.5,\n    15\n  ],\n  \"draughts\": [\n    {\n      \"value\": 7,\n      \"attribute\": \"Ballast\"\n    },\n    {\n      \"value\": 11,\n      \"attribute\": \"Loaded\"\n    }\n  ],\n  \"trims\": [\n    0\n  ],\n  \"beauforts\": [\n    4\n  ],\n  \"addedResistance\": 35,\n  \"addedResistanceComment\": null,\n  \"addedResistanceSlope\": null,\n  \"hfoLcvReference\": 40300,\n  \"dataQuality\": \"Low\",\n  \"engineEfficiencyCalibration\": 1.03,\n  \"fuelConsumptionAtNCR\": 33.47612681864845,\n  \"parameters\": {\n    \"dataFilters\": {\n      \"applyPowerFilterOnTorsionMeter\": false,\n      \"applyPowerFilterOnFuelConsumption\": true,\n      \"minPower\": 10,\n      \"applyObservedOverGroundSpeedFilter\": true,\n      \"applyLoggedThroughWaterSpeedFilter\": false,\n      \"minSpeed\": 8,\n      \"maxSpeed\": 30,\n      \"maxBeaufort\": 5,\n      \"minReportDuration\": 10,\n      \"includeLoadedDraft\": true,\n      \"includeBallastDraft\": true,\n      \"applyAddedResistanceFilter\": false,\n      \"minAddedResistance\": -20,\n      \"maxAddedResistance\": 120,\n      \"applyLogFactorFilter\": false,\n      \"logFactorThreshold\": 10,\n      \"applyAisDistanceFilter\": false,\n      \"aisDistanceThreshold\": 0\n    },\n    \"operationalDataFilters\": null,\n    \"trustedLevel\": 30,\n    \"evaluationType\": 5,\n    \"userSelectedEvaluationDate\": \"2020-11-06T06:13:09.5024341Z\",\n    \"addedResistance\": 0,\n    \"engineCalibration\": 3,\n    \"outputFormat\": 0,\n    \"speedStep\": 0.5,\n    \"draftStep\": 1,\n    \"trimStep\": 1,\n    \"useOnlyLoadedAndBallastDraft\": true,\n    \"useOnlyEvenKeel\": true,\n    \"outputBeaufortNumbers\": [\n      4\n    ],\n    \"windWaveDirection\": 2,\n    \"performanceIndicator\": 2,\n    \"useMinReportAmount\": false,\n    \"minReportAmount\": 7,\n    \"weatherSource\": 1,\n    \"trendEvaluationType\": 2,\n    \"selectedReportTypes\": [\n      0,\n      4\n    ]\n  },\n  \"es\": {\n    \"totalReports\": 0,\n    \"totalEvents\": 0,\n    \"excludedReports\": 181,\n    \"piStat\": [\n      {\n        \"pi\": 2,\n        \"errors\": 23\n      }\n    ],\n    \"errorMessages\": [],\n    \"warnings\": []\n  },\n  \"hasTrimmedModel\": false,\n  \"hasRpmModel\": false\n}"
+                            }
+                        ]
+                    }
+                ],
+                "displayName": "FuelTables",
+                "method": "POST",
+                "urlTemplate": "/fueltables/vessel/{imoNumber}"
+            },
+            "name": "[concat(parameters('ApimServiceName'), '/vpsolutions/fueltables')]",
+            "type": "Microsoft.ApiManagement/service/apis/operations",
+            "apiVersion": "2019-01-01",
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service/apis', parameters('ApimServiceName'), 'vpsolutions')]"
+            ]
+        },
+        {
+            "properties": {
+                "value": "[concat(parameters('PolicyXMLBaseUrl'), '/vpsolutions-fueltables-operationPolicy.xml')]",
+                "format": "rawxml-link"
+            },
+            "name": "[concat(parameters('ApimServiceName'), '/vpsolutions/fueltables/policy')]",
+            "type": "Microsoft.ApiManagement/service/apis/operations/policies",
+            "apiVersion": "2019-01-01",
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('ApimServiceName'), 'vpsolutions', 'fueltables')]"
+            ]
+        },
+        {
+            "properties": {
+                "value": "[concat(parameters('PolicyXMLBaseUrl'), '/vpsolutions-apiPolicy.xml')]",
+                "format": "rawxml-link"
+            },
+            "name": "[concat(parameters('ApimServiceName'), '/vpsolutions/policy')]",
+            "type": "Microsoft.ApiManagement/service/apis/policies",
+            "apiVersion": "2019-01-01",
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service/apis', parameters('ApimServiceName'), 'vpsolutions')]"
+            ]
+        }
+    ]
+}
