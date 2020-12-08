@@ -33,8 +33,6 @@
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2018-05-01",
       "dependsOn": [
-        "[resourceId('Microsoft.Resources/deployments', 'globalServicePolicyTemplate')]",
-        "[resourceId('Microsoft.Resources/deployments', 'productsTemplate')]"
       ]
     },
     {
@@ -57,8 +55,6 @@
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2018-05-01",
       "dependsOn": [
-        "[resourceId('Microsoft.Resources/deployments', 'globalServicePolicyTemplate')]",
-        "[resourceId('Microsoft.Resources/deployments', 'productsTemplate')]"
       ]
     }
   ]
