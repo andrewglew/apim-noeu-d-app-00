@@ -5,6 +5,9 @@
     "ApimServiceName": {
       "type": "string"
     },
+    "LinkedTemplatesBaseUrl": {
+        "type": "string"
+    },
     "PolicyXMLBaseUrl": {
       "type": "string"
     }
