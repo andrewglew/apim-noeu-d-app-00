@@ -10,6 +10,9 @@
           },
           "PolicyXMLBaseUrl": {
             "value": "https://raw.githubusercontent.com/andrewglew/apim-noeu-d-app-00/master/apim-extract/policies"
+          },
+          "KeyvaultName": {
+            "value": "mt-t-eun-ipaas-kv.vault.azure.net"
           }
     }
 }
