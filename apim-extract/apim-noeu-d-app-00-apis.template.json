@@ -29,9 +29,6 @@
           },
           "PolicyXMLBaseUrl": {
             "value": "[parameters('PolicyXMLBaseUrl')]"
-          },
-          "KeyvaultName": {
-            "value": "[parameters('KeyvaultName')]"
           }
         }
       },
