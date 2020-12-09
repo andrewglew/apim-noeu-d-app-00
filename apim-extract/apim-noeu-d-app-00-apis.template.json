@@ -18,7 +18,7 @@
   "resources": [
     {
       "properties": {
-        "mode": "Incremental",
+        "mode": "Complete",
         "templateLink": {
           "uri": "[concat(parameters('LinkedTemplatesBaseUrl'), '/apim-noeu-d-app-00-echo-api-api.template.json')]",
           "contentVersion": "1.0.0.0"
@@ -35,12 +35,11 @@
       "name": "echo-apiTemplate",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2018-05-01",
-      "dependsOn": [
-      ]
+      "dependsOn": []
     },
     {
       "properties": {
-        "mode": "Incremental",
+        "mode": "Complete",
         "templateLink": {
           "uri": "[concat(parameters('LinkedTemplatesBaseUrl'), '/apim-noeu-d-app-00-vpsolutions-api.template.json')]",
           "contentVersion": "1.0.0.0"
@@ -60,8 +59,7 @@
       "name": "vpsolutionsTemplate",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2018-05-01",
-      "dependsOn": [
-      ]
+      "dependsOn": []
     }
   ]
 }
