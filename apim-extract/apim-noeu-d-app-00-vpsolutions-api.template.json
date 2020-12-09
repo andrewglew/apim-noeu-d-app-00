@@ -106,6 +106,73 @@
         },
         {
             "properties": {
+                "templateParameters": [
+                    {
+                    "name": "imoNumber",
+                    "type": "",
+                    "required": true,
+                    "values": []
+                    }
+                ],
+                "description": "Return fuel table results for the specified sailing conditions",
+                "request": {
+                    "queryParameters": [],
+                    "headers": [
+                        {
+                            "name": " Content-Tyoe",
+                            "type": "string",
+                            "defaultValue": "application/json",
+                            "required": true,
+                            "values": [
+                                "application/json"
+                            ]
+                        }
+                    ],
+                    "representations": [
+                        {
+                            "contentType": "application/json",
+                            "sample": "{\n  \"draught\": -1,\n  \"calibration\": \"UserSelectedCalibration\",\n  \"calibrationDate\": \"2020-12-01T08:48:41.1450862Z\",\n  \"userDefinedAddedResistance\": 10,\n  \"courseOverGround\": 10,\n  \"windSpeed\": 2,\n  \"absoluteWindDirection\": 34,\n  \"waveHeight\": 2.4,\n  \"absoluteWaveDirection\": 198,\n  \"swellHeight\": 5.1,\n  \"absoluteSwellDirection\": 354,\n  \"currentSpeed\": 0.4,\n  \"absoluteCurrentDirection\": 11\n}"
+                        }
+                    ]
+                },
+                "responses": [
+                    {
+                        "statusCode": 200,
+                        "description": "Fuel Table under sailing conditions results in Ok",
+                        "headers": [],
+                        "representations": [
+                            {
+                                "contentType": "application/json",
+                                "sample": "{\n  \"vessel\": {\n    \"imoNumber\": \"string\",\n    \"name\": \"string\",\n    \"id\": \"string\"\n  },\n  \"fuelReportItems\": [\n    {\n      \"speedOverGround\": 0,\n      \"meLoadPercentage\": 0,\n      \"meLoad\": 0,\n      \"meFuelConsumption\": 0,\n      \"totalFuelConsumption\": 0,\n      \"rpm\": 0\n    }\n  ],\n  \"addedResistance\": 0,\n  \"addedResistanceComment\": \"string\",\n  \"engineEfficiencyCalibration\": 0,\n  \"executionStatistics\": {\n    \"totalReports\": 0,\n    \"totalEvents\": 0,\n    \"excludedReports\": 0,\n    \"piStat\": [\n      {\n        \"pi\": 0,\n        \"errors\": 0\n      }\n    ],\n    \"errorMessages\": [\n      \"string\"\n    ],\n    \"warnings\": [\n      \"string\"\n    ]\n  }\n}"
+                            }
+                        ]
+                    }
+                ],
+                "displayName": "SailingConditions",
+                "method": "POST",
+                "urlTemplate": "/fueltables/sailingconditions/vessel/{imoNumber}"
+            },
+            "name": "[concat(parameters('ApimServiceName'), '/vpsolutions/sailingconditions')]",
+            "type": "Microsoft.ApiManagement/service/apis/operations",
+            "apiVersion": "2019-01-01",
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service/apis', parameters('ApimServiceName'), 'vpsolutions')]"
+            ]
+        },
+        {
+            "properties": {
+                "value": "<policies>\r\n\t<inbound>\r\n\t\t<base />\r\n\t\t<set-header name=\"Authorization\" exists-action=\"override\">\r\n\t\t\t<value>@(\"Bearer \" + (string)context.Variables[\"tokenVps\"])</value>\r\n\t\t</set-header>\r\n\t\t<rewrite-uri template=\"/api/v1/Report/FuelTables/SailingConditions/Vessel/{imoNumber}\" />\r\n\t</inbound>\r\n\t<backend>\r\n\t\t<base />\r\n\t</backend>\r\n\t<outbound>\r\n\t\t<base />\r\n\t</outbound>\r\n\t<on-error>\r\n\t\t<base />\r\n\t</on-error>\r\n</policies>",
+                "format": "rawxml"
+            },
+            "name": "[concat(parameters('ApimServiceName'), '/vpsolutions/sailingconditions/policy')]",
+            "type": "Microsoft.ApiManagement/service/apis/operations/policies",
+            "apiVersion": "2019-01-01",
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('ApimServiceName'), 'vpsolutions', 'sailingconditions')]"
+            ]
+        },
+        {
+            "properties": {
                 "templateParameters": [],
                 "description": "Get list of vessels used in VPS",
                 "request": {
