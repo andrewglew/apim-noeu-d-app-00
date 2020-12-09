@@ -7,9 +7,6 @@
         },
         "PolicyXMLBaseUrl": {
             "type": "string"
-        },
-        "KeyvaultName": {
-            "type": "string"
         }
     },
     "resources": [
@@ -109,8 +106,7 @@
         },
         {
             "properties": {
-                "value": "[concat('<policies>\r\n\t<!-- \n    - obtain keyvault secret for vps password \n    - transform response to string\n    - use kv variable to get the token from vps\n    - save vps token in cache for 12 hours -->\r\n\t<inbound>\r\n\t\t<base />\r\n\t\t<cache-lookup-value key=\"vps-token\" variable-name=\"tokenVps\" />\r\n\t\t<choose>\r\n\t\t\t<when condition=\"@(!context.Variables.ContainsKey(\"tokenVps\"))\">\r\n\t\t\t\t<send-request mode=\"new\" response-variable-name=\"secretResponse\" timeout=\"20\" ignore-error=\"false\">\r\n\t\t\t\t\t<set-url>https://',parameters('KeyvaultName'),'/secrets/vps-password?api-version=7.0</set-url>\r\n\t\t\t\t\t<set-method>GET</set-method>\r\n\t\t\t\t\t<authentication-managed-identity resource=\"https://vault.azure.net\" />\r\n\t\t\t\t</send-request>\r\n\t\t\t\t<set-variable name=\"vpsPw\" value=\"@{\n                var secret = ((IResponse)context.Variables[\"secretResponse\"]).Body.As<JObject>();\n                return secret[\"value\"].ToString();}\" />\r\n\t\t\t\t<send-request ignore-error=\"true\" timeout=\"20\" response-variable-name=\"bearerToken\" mode=\"new\">\r\n\t\t\t\t\t<set-url>https://performance.vpsolutions.dk/Token</set-url>\r\n\t\t\t\t\t<set-method>POST</set-method>\r\n\t\t\t\t\t<set-header name=\"Content-Type\" exists-action=\"override\">\r\n\t\t\t\t\t\t<value>application/x-www-form-urlencoded</value>\r\n\t\t\t\t\t</set-header>\r\n\t\t\t\t\t<set-body>@{\n                        var pw = (string)context.Variables[\"vpsPw\"];\n                        return \"grant_type=password&username=IMOS.Fueltable@maersktankers.com&password=\" + pw;\n                        }</set-body>\r\n\t\t\t\t</send-request>\r\n\t\t\t\t<set-variable name=\"tokenVps\" value=\"@((string)((IResponse)context.Variables[\"bearerToken\"]).Body.As<JObject>()[\"access_token\"])\" />\r\n\t\t\t\t<cache-store-value key=\"vps-token\" value=\"@((string)context.Variables[\"tokenVps\"])\" duration=\"43200\" />\r\n\t\t\t</when>\r\n\t\t</choose>\r\n\t</inbound>\r\n\t<backend>\r\n\t\t<base />\r\n\t</backend>\r\n\t<outbound>\r\n\t\t<base />\r\n\t</outbound>\r\n\t<on-error>\r\n\t\t<base />\r\n\t</on-error>\r\n</policies>')]",
-                
+                "value": "[concat(parameters('PolicyXMLBaseUrl'), '/vpsolutions-apiPolicy.xml')]",
                 "format": "rawxml"
             },
             "name": "[concat(parameters('ApimServiceName'), '/vpsolutions/policy')]",

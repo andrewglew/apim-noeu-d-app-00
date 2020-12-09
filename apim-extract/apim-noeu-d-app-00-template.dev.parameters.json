@@ -2,17 +2,14 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "ApimServiceName": {
-            "value": "apim-noeu-d-app-00"
-          },
-          "LinkedTemplatesBaseUrl": {
-            "value": "https://raw.githubusercontent.com/andrewglew/apim-noeu-d-app-00/master/apim-extract"
-          },
-          "PolicyXMLBaseUrl": {
-            "value": "https://raw.githubusercontent.com/andrewglew/apim-noeu-d-app-00/master/apim-extract/policies"
-          },
-          "KeyvaultName": {
-            "value": "mt-d-eun-ipaas-kv.vault.azure.net"
-          }
+    "ApimServiceName": {
+      "value": "apim-noeu-d-app-00"
+    },
+    "LinkedTemplatesBaseUrl": {
+      "value": "https://raw.githubusercontent.com/andrewglew/apim-noeu-d-app-00/master/apim-extract"
+    },
+    "PolicyXMLBaseUrl": {
+      "value": "https://raw.githubusercontent.com/andrewglew/apim-noeu-d-app-00/master/apim-extract/policies"
     }
+  }
 }
