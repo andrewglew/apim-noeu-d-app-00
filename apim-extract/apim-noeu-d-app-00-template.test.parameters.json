@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "ApimServiceName": {
-            "value": "apim-noeu-t-app-00"
+            "value": "apim-noeu-t-app-00A"
           },
           "LinkedTemplatesBaseUrl": {
             "value": "https://raw.githubusercontent.com/andrewglew/apim-noeu-d-app-00/master/apim-extract"

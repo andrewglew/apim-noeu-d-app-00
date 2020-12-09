@@ -18,7 +18,7 @@
   "resources": [
     {
       "properties": {
-        "mode": "Complete",
+        "mode": "Incremental",
         "templateLink": {
           "uri": "[concat(parameters('LinkedTemplatesBaseUrl'), '/apim-noeu-d-app-00-echo-api-api.template.json')]",
           "contentVersion": "1.0.0.0"
@@ -39,7 +39,7 @@
     },
     {
       "properties": {
-        "mode": "Complete",
+        "mode": "Incremental",
         "templateLink": {
           "uri": "[concat(parameters('LinkedTemplatesBaseUrl'), '/apim-noeu-d-app-00-vpsolutions-api.template.json')]",
           "contentVersion": "1.0.0.0"
