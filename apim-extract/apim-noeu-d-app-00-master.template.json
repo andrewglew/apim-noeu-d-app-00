@@ -19,6 +19,12 @@
       "metadata": {
         "description": "Base URL of the repository that contains the generated policy files"
       }
+    },
+    "KeyvaultName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of Keyvault used"
+      }
     }
   },
   "resources": [
@@ -80,6 +86,9 @@
           },
           "PolicyXMLBaseUrl": {
             "value": "[parameters('PolicyXMLBaseUrl')]"
+          },
+          "KeyvaultName": {
+            "value": "[parameters('KeyvaultName')]"
           }
         }
       },

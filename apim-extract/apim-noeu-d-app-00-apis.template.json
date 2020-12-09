@@ -10,6 +10,9 @@
     },
     "PolicyXMLBaseUrl": {
       "type": "string"
+    },
+    "KeyvaultName": {
+      "type": "string"
     }
   },
   "resources": [
@@ -48,6 +51,9 @@
           },
           "PolicyXMLBaseUrl": {
             "value": "[parameters('PolicyXMLBaseUrl')]"
+          },
+          "KeyvaultName": {
+            "value": "[parameters('KeyvaultName')]"
           }
         }
       },
