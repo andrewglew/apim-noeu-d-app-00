@@ -48,9 +48,6 @@
           "ApimServiceName": {
             "value": "[parameters('ApimServiceName')]"
           },
-          "PolicyXMLBaseUrl": {
-            "value": "[parameters('PolicyXMLBaseUrl')]"
-          },
           "KeyvaultName": {
             "value": "[parameters('KeyvaultName')]"
           }

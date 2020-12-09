@@ -5,9 +5,6 @@
         "ApimServiceName": {
             "type": "string"
         },
-        "PolicyXMLBaseUrl": {
-            "type": "string"
-        },
         "KeyvaultName": {
             "type": "string"
         }
@@ -109,8 +106,52 @@
         },
         {
             "properties": {
-                "value": "[concat('<policies>\r\n\t<!-- \n    - obtain keyvault secret for vps password \n    - transform response to string\n    - use kv variable to get the token from vps\n    - save vps token in cache for 12 hours -->\r\n\t<inbound>\r\n\t\t<base />\r\n\t\t<cache-lookup-value key=\"vps-token\" variable-name=\"tokenVps\" />\r\n\t\t<choose>\r\n\t\t\t<when condition=\"@(!context.Variables.ContainsKey(\"tokenVps\"))\">\r\n\t\t\t\t<send-request mode=\"new\" response-variable-name=\"secretResponse\" timeout=\"20\" ignore-error=\"false\">\r\n\t\t\t\t\t<set-url>https://',parameters('KeyvaultName'),'/secrets/vps-password?api-version=7.0</set-url>\r\n\t\t\t\t\t<set-method>GET</set-method>\r\n\t\t\t\t\t<authentication-managed-identity resource=\"https://vault.azure.net\" />\r\n\t\t\t\t</send-request>\r\n\t\t\t\t<set-variable name=\"vpsPw\" value=\"@{\n                var secret = ((IResponse)context.Variables[\"secretResponse\"]).Body.As<JObject>();\n                return secret[\"value\"].ToString();}\" />\r\n\t\t\t\t<send-request ignore-error=\"true\" timeout=\"20\" response-variable-name=\"bearerToken\" mode=\"new\">\r\n\t\t\t\t\t<set-url>https://performance.vpsolutions.dk/Token</set-url>\r\n\t\t\t\t\t<set-method>POST</set-method>\r\n\t\t\t\t\t<set-header name=\"Content-Type\" exists-action=\"override\">\r\n\t\t\t\t\t\t<value>application/x-www-form-urlencoded</value>\r\n\t\t\t\t\t</set-header>\r\n\t\t\t\t\t<set-body>@{\n                        var pw = (string)context.Variables[\"vpsPw\"];\n                        return \"grant_type=password&username=IMOS.Fueltable@maersktankers.com&password=\" + pw;\n                        }</set-body>\r\n\t\t\t\t</send-request>\r\n\t\t\t\t<set-variable name=\"tokenVps\" value=\"@((string)((IResponse)context.Variables[\"bearerToken\"]).Body.As<JObject>()[\"access_token\"])\" />\r\n\t\t\t\t<cache-store-value key=\"vps-token\" value=\"@((string)context.Variables[\"tokenVps\"])\" duration=\"43200\" />\r\n\t\t\t</when>\r\n\t\t</choose>\r\n\t</inbound>\r\n\t<backend>\r\n\t\t<base />\r\n\t</backend>\r\n\t<outbound>\r\n\t\t<base />\r\n\t</outbound>\r\n\t<on-error>\r\n\t\t<base />\r\n\t</on-error>\r\n</policies>')]",
-                
+                "templateParameters": [],
+                "description": "Get list of vessels used in VPS",
+                "request": {
+                    "queryParameters": [],
+                    "headers": [],
+                    "representations": []
+                },
+                "responses": [
+                    {
+                        "statusCode": 200,
+                        "description": "Vessel collection from VPSolutions",
+                        "headers": [],
+                        "representations": [
+                            {
+                                "contentType": "application/json",
+                                "sample": "[[{\n    \"id\": \"c3f9a2c3-1a46-4fce-b9ba-a99b01b9f97c\",\n    \"imoNumber\": \"9587829\",\n    \"name\": \"Adara\",\n    \"type\": 2,\n    \"active\": true,\n    \"subtypeId\": null,\n    \"shipManager\": null,\n    \"classId\": null,\n    \"countryId\": null\n}, {\n    \"id\": \"d7b1a221-51fb-4189-ba00-ac6eebdeac7c\",\n    \"imoNumber\": \"9289788\",\n    \"name\": \"Advance II\",\n    \"type\": 2,\n    \"active\": true,\n    \"subtypeId\": null,\n    \"shipManager\": \"Maersk Tankers\",\n    \"classId\": null,\n    \"countryId\": null\n}, {\n    \"id\": \"0a8bfd35-b186-45fb-a6ea-415d02da944e\",\n    \"imoNumber\": \"9587831\",\n    \"name\": \"Agena\",\n    \"type\": 2,\n    \"active\": true,\n    \"subtypeId\": null,\n    \"shipManager\": null,\n    \"classId\": null,\n    \"countryId\": null\n}, {\n    \"id\": \"22be7ac5-a18e-4312-86ef-8585b4c57f31\",\n    \"imoNumber\": \"9385831\",\n    \"name\": \"Alcyone T\",\n    \"type\": 2,\n    \"active\": true,\n    \"subtypeId\": null,\n    \"shipManager\": null,\n    \"classId\": null,\n    \"countryId\": null\n}, {\n    \"id\": \"76c84fed-2d27-430f-9aea-2850f4fbb320\",\n    \"imoNumber\": \"9865764\",\n    \"name\": \"Alexandros\",\n    \"type\": 2,\n    \"active\": true,\n    \"subtypeId\": null,\n    \"shipManager\": null,\n    \"classId\": null,\n    \"countryId\": null\n}, {\n    \"id\": \"559d6029-3c69-4a4e-b106-11f4bee6a617\",\n    \"imoNumber\": \"9436707\",\n    \"name\": \"Allegra\",\n    \"type\": 2,\n    \"active\": true,\n    \"subtypeId\": null,\n    \"shipManager\": \"Maersk Tankers\",\n    \"classId\": null,\n    \"countryId\": null\n}, {\n    \"id\": \"ee52f658-ec79-485b-b5ae-72004aa364e3\",\n    \"imoNumber\": \"9494668\",\n    \"name\": \"Aquarius T\",\n    \"type\": 2,\n    \"active\": true,\n    \"subtypeId\": null,\n    \"shipManager\": null,\n    \"classId\": null,\n    \"countryId\": null\n}, {\n    \"id\": \"46416d26-d44f-46e1-9d4b-66ec841f036f\",\n    \"imoNumber\": \"9395989\",\n    \"name\": \"Arsland\",\n    \"type\": 2,\n    \"active\": true,\n    \"subtypeId\": null,\n    \"shipManager\": null,\n    \"classId\": null,\n    \"countryId\": null\n}, {\n    \"id\": \"2961e25a-7c26-45d6-8b05-a22d6259168b\",\n    \"imoNumber\": \"9587843\",\n    \"name\": \"Astella\",\n    \"type\": 2,\n    \"active\": true,\n    \"subtypeId\": null,\n    \"shipManager\": null,\n    \"classId\": null,\n    \"countryId\": null\n}, {\n    \"id\": \"b398d806-97ae-476a-bd58-4eb23d01d71a\",\n    \"imoNumber\": \"9258363\",\n    \"name\": \"Astral Express\",\n    \"type\": 2,\n    \"active\": true,\n    \"subtypeId\": null,\n    \"shipManager\": \"Maersk Tankers\",\n    \"classId\": null,\n    \"countryId\": null\n}, {\n    \"id\": \"3167ed3c-8308-4127-8c25-a4b0f9a016ac\",\n    \"imoNumber\": \"9450789\",\n    \"name\": \"Atalanta T\",\n    \"type\": 2,\n    \"active\": true,\n    \"subtypeId\": null,\n    \"shipManager\": \"Maersk Tankers\",\n    \"classId\": null,\n    \"countryId\": null\n}, {\n    \"id\": \"8e182035-147b-4d57-bc7f-71ece3f033ea\",\n    \"imoNumber\": \"9383974\",\n    \"name\": \"Atlantic Canyon\",\n    \"type\": 2,\n    \"active\": true,\n    \"subtypeId\": null,\n    \"shipManager\": \"Maersk Tankers\",\n    \"classId\": null,\n    \"countryId\": null\n}, {\n    \"id\": \"d400273d-6165-49f7-a3c7-4c82f97f87a9\",\n    \"imoNumber\": \"9332169\",\n    \"name\": \"Atlantic Crown\",\n    \"type\": 2,\n    \"active\": true,\n    \"subtypeId\": null,\n    \"shipManager\": null,\n    \"classId\": null,\n    \"countryId\": null\n}, {\n    \"id\": \"fca5e89f-d649-47a0-8c52-d9339eaeeaac\",\n    \"imoNumber\": \"9332183\",\n    \"name\": \"Atlantic Eagle\",\n    \"type\": 2,\n    \"active\": true,\n    \"subtypeId\": null,\n    \"shipManager\": null,\n    \"classId\": null,\n    \"countryId\": null\n}, {\n    \"id\": \"23f62472-cda9-4e27-a82b-9bfa07366f45\",\n    \"imoNumber\": \"9383962\",\n    \"name\": \"Atlantic Jupiter\",\n    \"type\": 2,\n    \"active\": true,\n    \"subtypeId\": null,\n    \"shipManager\": null,\n    \"classId\": null,\n    \"countryId\": null\n}, {\n    \"id\": \"4bf9439e-4042-40ae-9f87-a1c4453c346f\",\n    \"imoNumber\": \"9455052\",\n    \"name\": \"Atlantic Sirius\",\n    \"type\": 2,\n    \"active\": true,\n    \"subtypeId\": null,\n    \"shipManager\": \"Maersk Tankers\",\n    \"classId\": null,\n    \"countryId\": null\n}, {\n    \"id\": \"d402179e-8af2-43fc-98e3-ac4b95696dcf\",\n    \"imoNumber\": \"9464560\",\n    \"name\": \"Atlantic Symphony\",\n    \"type\": 2,\n    \"active\": true,\n    \"subtypeId\": null,\n    \"shipManager\": \"Maersk Tankers\",\n    \"classId\": null,\n    \"countryId\": null\n}, {\n    \"id\": \"5eede8cf-fa97-4dcf-b12c-9891b28ddf0b\",\n    \"imoNumber\": \"9403322\",\n    \"name\": \"Atlantic T\",\n    \"type\": 2,\n    \"active\": true,\n    \"subtypeId\": null,\n    \"shipManager\": \"Maersk Tankers\",\n    \"classId\": null,\n    \"countryId\": null\n}\n]"
+                            }
+                        ]
+                    }
+                ],
+                "displayName": "Vessels",
+                "method": "GET",
+                "urlTemplate": "/vessels"
+            },
+            "name": "[concat(parameters('ApimServiceName'), '/vpsolutions/vessels')]",
+            "type": "Microsoft.ApiManagement/service/apis/operations",
+            "apiVersion": "2019-01-01",
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service/apis', parameters('ApimServiceName'), 'vpsolutions')]"
+            ]
+        },
+        {
+            "properties": {
+                "value": "<policies>\r\n\t<inbound>\r\n\t\t<base />\r\n\t\t<set-header name=\"Authorization\" exists-action=\"override\">\r\n\t\t\t<value>@(\"Bearer \" + (string)context.Variables[\"tokenVps\"])</value>\r\n\t\t</set-header>\r\n\t\t<rewrite-uri template=\"api/v2/Vessels\" />\r\n\t</inbound>\r\n\t<backend>\r\n\t\t<base />\r\n\t</backend>\r\n\t<outbound>\r\n\t\t<base />\r\n\t</outbound>\r\n\t<on-error>\r\n\t\t<base />\r\n\t</on-error>\r\n</policies>",
+                "format": "rawxml"
+            },
+            "name": "[concat(parameters('ApimServiceName'), '/vpsolutions/vessels/policy')]",
+            "type": "Microsoft.ApiManagement/service/apis/operations/policies",
+            "apiVersion": "2019-01-01",
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('ApimServiceName'), 'vpsolutions', 'vessels')]"
+            ]
+        },
+        {
+            "properties": {
+                "value": "[concat('<policies>\r\n\t<!-- \n    - obtain keyvault secret for vps password \n    - transform response to string\n    - use kv variable to get the token from vps\n    - save vps token in cache for 12 hours -->\r\n\t<inbound>\r\n\t\t<base />\r\n\t\t<cache-lookup-value key=\"vps-token\" variable-name=\"tokenVps\" />\r\n\t\t<choose>\r\n\t\t\t<when condition=\"@(!context.Variables.ContainsKey(\"tokenVps\"))\">\r\n\t\t\t\t<send-request mode=\"new\" response-variable-name=\"secretResponse\" timeout=\"20\" ignore-error=\"false\">\r\n\t\t\t\t\t<set-url>https://',parameters('KeyvaultName'),'/secrets/vps-password?api-version=7.0</set-url>\r\n\t\t\t\t\t<set-method>GET</set-method>\r\n\t\t\t\t\t<authentication-managed-identity resource=\"https://vault.azure.net\" />\r\n\t\t\t\t</send-request>\r\n\t\t\t\t<set-variable name=\"vpsPw\" value=\"@{\n                var secret = ((IResponse)context.Variables[\"secretResponse\"]).Body.As<JObject>();\n                return secret[\"value\"].ToString();}\" />\r\n\t\t\t\t<send-request ignore-error=\"true\" timeout=\"20\" response-variable-name=\"bearerToken\" mode=\"new\">\r\n\t\t\t\t\t<set-url>https://performance.vpsolutions.dk/Token</set-url>\r\n\t\t\t\t\t<set-method>POST</set-method>\r\n\t\t\t\t\t<set-header name=\"Content-Type\" exists-action=\"override\">\r\n\t\t\t\t\t\t<value>application/x-www-form-urlencoded</value>\r\n\t\t\t\t\t</set-header>\r\n\t\t\t\t\t<set-body>@{\n                        var pw = (string)context.Variables[\"vpsPw\"];\n                        return \"grant_type=password&username=IMOS.Fueltable@maersktankers.com&password=\" + pw;\n                        }</set-body>\r\n\t\t\t\t</send-request>\r\n\t\t\t\t<set-variable name=\"tokenVps\" value=\"@((string)((IResponse)context.Variables[\"bearerToken\"]).Body.As<JObject>()[\"access_token\"])\" />\r\n\t\t\t\t<cache-store-value key=\"vps-token\" value=\"@((string)context.Variables[\"tokenVps\"])\" duration=\"43200\" />\r\n\t\t\t</when>\r\n\t\t</choose>\r\n\t</inbound>\r\n\t<backend>\r\n\t\t<base />\r\n\t</backend>\r\n\t<outbound>\r\n\t\t<base />\r\n\t</outbound>\r\n\t<on-error>\r\n\t\t<base />\r\n\t</on-error>\r\n</policies>')]",                
                 "format": "rawxml"
             },
             "name": "[concat(parameters('ApimServiceName'), '/vpsolutions/policy')]",
