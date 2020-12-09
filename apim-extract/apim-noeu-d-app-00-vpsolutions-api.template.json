@@ -227,6 +227,15 @@
             "dependsOn": [
                 "[resourceId('Microsoft.ApiManagement/service/apis', parameters('ApimServiceName'), 'vpsolutions')]"
             ]
+        },
+        {
+            "properties": {},
+            "name": "[concat(parameters('ApimServiceName'), '/vp-product/vpsolutions')]",
+            "type": "Microsoft.ApiManagement/service/products/apis",
+            "apiVersion": "2019-01-01",
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service/apis', parameters('ApimServiceName'), 'vpsolutions')]"
+            ]
         }
     ]
 }
