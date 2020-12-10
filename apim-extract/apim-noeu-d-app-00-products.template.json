@@ -144,6 +144,20 @@
       "name": "[concat(parameters('ApimServiceName'), '/vp-product')]",
       "type": "Microsoft.ApiManagement/service/products",
       "apiVersion": "2019-01-01"
+    },
+    {
+      "properties": {
+        "description": "Maersk Tankers Integrations team within IT",
+        "displayName": "Integration Developers",
+        "type": "custom",
+        "builtIn": false
+      },
+      "name": "[concat(parameters('ApimServiceName'), '/vp-product/integration-developers')]",
+      "type": "Microsoft.ApiManagement/service/products/groups",
+      "apiVersion": "2019-01-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products', parameters('ApimServiceName'), 'vp-product')]"
+      ]
     }
   ]
 }

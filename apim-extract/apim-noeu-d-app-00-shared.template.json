@@ -1,0 +1,24 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "ApimServiceName": {
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+        "type": "Microsoft.ApiManagement/service/groups",
+        "name": "[concat(parameters('ApimServiceName'), '/integration-developers')]",
+        "apiVersion": "2017-03-01",
+        "scale": null,
+        "properties": {
+            "displayName": "Integration Developers",
+            "description": "Group containing all developers and services from Maersk Tankers IT who will be consuming our APIs",
+            "type": "custom",
+            "builtIn": false
+        },
+        "dependsOn": []
+    }
+  ]
+}

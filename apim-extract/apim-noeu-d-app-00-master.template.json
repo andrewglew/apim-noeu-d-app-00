@@ -74,6 +74,24 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
+          "uri": "[concat(parameters('LinkedTemplatesBaseUrl'), '/apim-noeu-d-app-00-shared.template.json')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "ApimServiceName": {
+            "value": "[parameters('ApimServiceName')]"
+          }
+        }
+      },
+      "name": "sharedTemplate",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2018-05-01",
+      "dependsOn": []
+    },
+    {
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
           "uri": "[concat(parameters('LinkedTemplatesBaseUrl'), '/apim-noeu-d-app-00-apis.template.json')]",
           "contentVersion": "1.0.0.0"
         },
@@ -97,7 +115,8 @@
       "apiVersion": "2018-05-01",
       "dependsOn": [
         "[resourceId('Microsoft.Resources/deployments', 'globalServicePolicyTemplate')]",
-        "[resourceId('Microsoft.Resources/deployments', 'productsTemplate')]"
+        "[resourceId('Microsoft.Resources/deployments', 'productsTemplate')]",
+        "[resourceId('Microsoft.Resources/deployments', 'sharedTemplate')]"
       ]
     }
   ]
