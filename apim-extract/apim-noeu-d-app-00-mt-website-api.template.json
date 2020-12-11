@@ -89,6 +89,8 @@
                 "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('ApimServiceName'), 'public-website-content', 'fleet')]"
             ]
         },
+
+        
         {
             "properties": {
                 "templateParameters": [],
