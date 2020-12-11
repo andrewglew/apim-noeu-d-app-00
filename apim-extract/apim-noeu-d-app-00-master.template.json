@@ -46,7 +46,6 @@
         "description": "Name of web fleet logic app resource group"
       }
     },
-
     "workflows_mt_x_eun_apim_hgw_web_fleet_log_uri": {
       "defaultValue": "https://prod-01.northeurope.logic.azure.com/workflows/1d9462b988b44a469c8aa34186e28e83/triggers",
       "type": "String",
@@ -96,8 +95,7 @@
                 "secretName": "hgw-web-fleet-sig"
             }
           },
-
-          "workflows_mt_d_eun_apim_hgw_web_pool_data_log_sig": {
+          "workflows_mt_x_eun_apim_hgw_web_pool_data_log_sig": {
             "reference": {
               "keyVault": {
                   "id": "[resourceId(subscription().subscriptionId,  parameters('Keyvault_rg'), 'Microsoft.KeyVault/vaults', parameters('KeyvaultName'))]"
