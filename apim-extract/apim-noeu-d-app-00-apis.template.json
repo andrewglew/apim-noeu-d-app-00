@@ -95,7 +95,7 @@
           }
         }
       },
-      "name": "vpsolutionsTemplate",
+      "name": "mtwebsiteTemplate",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2018-05-01",
       "dependsOn": []
