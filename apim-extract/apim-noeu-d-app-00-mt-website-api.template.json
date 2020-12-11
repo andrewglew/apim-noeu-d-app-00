@@ -90,7 +90,7 @@
             ]
         },
 
-        
+
         {
             "properties": {
                 "templateParameters": [],
@@ -121,7 +121,7 @@
 
         {
             "properties": {
-                "value": "[concat('<policies>\r\n\t<inbound>\r\n\t\t<base />\r\n\t\t<set-backend-service id=\"apim-generated-policy\" backend-id=\"','/LogicApp_',parameters('workflows_mt_x_eun_apim_hgw_web_pool_data_log_name'),'_',parameters('workflows_mt_x_eun_apim_hgw_web_pool_data_log_rg'),'\" />\r\n\t\t<set-method id=\"apim-generated-policy\">POST</set-method>\r\n\t\t<rewrite-uri id=\"apim-generated-policy\" template=\"/manual/paths/invoke/?api-version=2016-06-01&amp;sp=/triggers/manual/run&amp;sv=1.0&amp;sig={{public-website-content_poolpartners_5fd32410b164f2f181a23424}}\" />\r\n\t\t<set-header id=\"apim-generated-policy\" name=\"Ocp-Apim-Subscription-Key\" exists-action=\"delete\" />\r\n\t</inbound>\r\n\t<backend>\r\n\t\t<base />\r\n\t</backend>\r\n\t<outbound>\r\n\t\t<base />\r\n\t</outbound>\r\n\t<on-error>\r\n\t\t<base />\r\n\t</on-error>\r\n</policies>')]",
+                "value": "[concat('<policies>\r\n\t<inbound>\r\n\t\t<base />\r\n\t\t<set-backend-service id=\"apim-generated-policy\" backend-id=\"','LogicApp_',parameters('workflows_mt_x_eun_apim_hgw_web_pool_data_log_name'),'_',parameters('workflows_mt_x_eun_apim_hgw_web_pool_data_log_rg'),'\" />\r\n\t\t<set-method id=\"apim-generated-policy\">POST</set-method>\r\n\t\t<rewrite-uri id=\"apim-generated-policy\" template=\"/manual/paths/invoke/?api-version=2016-06-01&amp;sp=/triggers/manual/run&amp;sv=1.0&amp;sig={{public-website-content_poolpartners_5fd32410b164f2f181a23424}}\" />\r\n\t\t<set-header id=\"apim-generated-policy\" name=\"Ocp-Apim-Subscription-Key\" exists-action=\"delete\" />\r\n\t</inbound>\r\n\t<backend>\r\n\t\t<base />\r\n\t</backend>\r\n\t<outbound>\r\n\t\t<base />\r\n\t</outbound>\r\n\t<on-error>\r\n\t\t<base />\r\n\t</on-error>\r\n</policies>')]",
                 "format": "rawxml"
             },
             "name": "[concat(parameters('ApimServiceName'), '/public-website-content/poolpartners/policy')]",
