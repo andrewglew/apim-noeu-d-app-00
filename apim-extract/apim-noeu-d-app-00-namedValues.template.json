@@ -1,0 +1,39 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "ApimServiceName": {
+            "type": "string"
+        },
+        "workflows_mt_x_eun_apim_hgw_web_fleet_log_sig": {
+            "type": "securestring"
+        },
+        "workflows_mt_x_eun_apim_hgw_web_pool_data_log_sig": {
+            "type": "securestring"
+        }
+    },
+    "resources": [
+      {
+        "properties": {
+          "tags": [],
+          "secret": true,
+          "displayName": "public-website-content_fleet_5fd32316987d5a5e2b62a05d",
+          "value": "[parameters('workflows_mt_x_eun_apim_hgw_web_fleet_log_sig')]"
+        },
+        "name": "[concat(parameters('ApimServiceName'), '/5fd32316987d5a5e2b62a05d')]",
+        "type": "Microsoft.ApiManagement/service/properties",
+        "apiVersion": "2019-01-01"
+      },
+      {
+        "properties": {
+          "tags": [],
+          "secret": true,
+          "displayName": "public-website-content_poolpartners_5fd32410b164f2f181a23424",
+          "value": "[parameters('workflows_mt_x_eun_apim_hgw_web_pool_data_log_sig')]"
+        },
+        "name": "[concat(parameters('ApimServiceName'), '/5fd32410b164f2f181a23424')]",
+        "type": "Microsoft.ApiManagement/service/properties",
+        "apiVersion": "2019-01-01"
+      }
+    ]
+  }

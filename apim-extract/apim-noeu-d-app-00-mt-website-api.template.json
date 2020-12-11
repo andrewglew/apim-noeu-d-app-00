@@ -1,0 +1,120 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "ApimServiceName": {
+            "type": "string"
+        }
+    },
+    "resources": [
+        
+        {
+            "properties": {
+                "description": "",
+                    "authenticationSettings": {
+                    "subscriptionKeyRequired": false
+                },
+                "subscriptionKeyParameterNames": {
+                    "header": "Ocp-Apim-Subscription-Key",
+                    "query": "subscription-key"
+                },
+                "apiRevision": "1",
+                "isCurrent": true,
+                "subscriptionRequired": true,
+                "displayName": "Public Website Content",
+                "path": "mt-website",
+                "protocols": [
+                    "https"
+                ]
+            },
+            "name": "[concat(parameters('ApimServiceName'), '/public-website-content')]",
+            "type": "Microsoft.ApiManagement/service/apis",
+            "apiVersion": "2019-01-01",
+            "dependsOn": []
+        },
+        {
+            "properties": {
+                "templateParameters": [],
+                "description": "Provide fleet data to be used as content on Maersk Tankers Public Website.\nInternal source system used is IMOS.",
+                "request": {
+                "queryParameters": [],
+                "headers": [],
+                "representations": []
+                },
+                "responses": [
+                {
+                    "statusCode": 200,
+                    "description": "JSON Body containing all fleet that are flagged as ShowOnWeb in source system.",
+                    "headers": [],
+                    "representations": [
+                    {
+                        "contentType": "application/json",
+                        "sample": "{\n    \"FleetTotalsSplitBySegment\": {\n        \"HANDY\": 82,\n        \"AFRA\": 10,\n        \"MR\": 112,\n        \"INTERMEDIATE\": 41,\n        \"LR2\": 21,\n        \"SUEZMAX\": 2,\n        \"FLEXI\": 5,\n        \"PANAMAX\": 2,\n        \"CITY\": 9\n    },\n    \"FleetCollection\": [\n        {\n            \"Type\": \"HANDY\",\n            \"Name\": \"ADARA\",\n            \"Ref_Nr\": \"VJ7E\",\n            \"Flag_Country_Name\": \"FRANCE\",\n            \"Build_Year\": 2011,\n            \"Yard\": \"Hyyndai Mipo Dockyard Co., Ltd\",\n            \"Tank_Coating\": \"Epoxy\",\n            \"Ice_Class\": \"NO\",\n            \"Imo\": \"IMO3\",\n            \"Imo_Number\": 9587829,\n            \"Draft\": 11.5,\n            \"Loa\": 184.3,\n            \"Beam\": 27.4,\n            \"Scnt\": 21305,\n            \"Pcbt\": 19366,\n            \"Cbm\": 41804,\n            \"Cbm_Slops\": 1049,\n            \"Cbm_No_Slops\": 40755,\n            \"Sdwt\": 37583.0,\n            \"Class\": \"Bureau Veritas\",\n            \"Piclub\": \"The Standard\",\n            \"Ktm\": 45.8\n        },\n        {\n            \"Type\": \"HANDY\",\n            \"Name\": \"AGENA\",\n            \"Ref_Nr\": \"VJ7D\",\n            \"Flag_Country_Name\": \"LUXEMBOURG\",\n            \"Build_Year\": 2011,\n            \"Yard\": \"Hyyndai Mipo Dockyard Co., Ltd\",\n            \"Tank_Coating\": \"Epoxy\",\n            \"Ice_Class\": \"NO\",\n            \"Imo\": \"IMO3\",\n            \"Imo_Number\": 9587831,\n            \"Draft\": 11.5,\n            \"Loa\": 184.3,\n            \"Beam\": 27.4,\n            \"Scnt\": 21305,\n            \"Pcbt\": 19336,\n            \"Cbm\": 41805,\n            \"Cbm_Slops\": 1049,\n            \"Cbm_No_Slops\": 40756,\n            \"Sdwt\": 37583.0,\n            \"Class\": \"Bureau Veritas\",\n            \"Piclub\": \"The Standard\",\n            \"Ktm\": 45.8\n        }\n   ]\n}"
+                    }
+                    ]
+                }
+                ],
+                "displayName": "Fleet",
+                "method": "GET",
+                "urlTemplate": "/fleet"
+            },
+            "name": "[concat(parameters('ApimServiceName'), '/public-website-content/fleet')]",
+            "type": "Microsoft.ApiManagement/service/apis/operations",
+            "apiVersion": "2019-01-01",
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service/apis', parameters('ApimServiceName'), 'public-website-content')]"
+            ]
+            },
+            {
+            "properties": {
+                "value": "<policies>\r\n\t<inbound>\r\n\t\t<base />\r\n\t\t<set-backend-service id=\"apim-generated-policy\" backend-id=\"LogicApp_mt-d-eun-apim-hgw-web-fleet-log_mt-d_51bfab6bac9075998b127a4a1b9c54b0\" />\r\n\t\t<set-method id=\"apim-generated-policy\">POST</set-method>\r\n\t\t<rewrite-uri id=\"apim-generated-policy\" template=\"/manual/paths/invoke/?api-version=2016-06-01&amp;sp=/triggers/manual/run&amp;sv=1.0&amp;sig={{public-website-content_fleet_5fd32316987d5a5e2b62a05d}}\" />\r\n\t\t<set-header id=\"apim-generated-policy\" name=\"Ocp-Apim-Subscription-Key\" exists-action=\"delete\" />\r\n\t</inbound>\r\n\t<backend>\r\n\t\t<base />\r\n\t</backend>\r\n\t<outbound>\r\n\t\t<base />\r\n\t</outbound>\r\n\t<on-error>\r\n\t\t<base />\r\n\t</on-error>\r\n</policies>",
+                "format": "rawxml"
+            },
+            "name": "[concat(parameters('ApimServiceName'), '/public-website-content/fleet/policy')]",
+            "type": "Microsoft.ApiManagement/service/apis/operations/policies",
+            "apiVersion": "2019-01-01",
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('ApimServiceName'), 'public-website-content', 'fleet')]"
+            ]
+        },
+        {
+            "properties": {
+                "templateParameters": [],
+                "description": "Obtain list of Pools containing Pool Partner listing",
+                "request": {
+                "description": "Management of Pool names to align with fleet request from source IMOS",
+                "queryParameters": [],
+                "headers": [],
+                "representations": [
+                    {
+                    "contentType": "application/json",
+                    "sample": "{\n        \"override-pool-names\": [\n            {\n                \"original\": \"Handy Tankers\",\n                \"replacement\": \"HANDY\"\n            },\n            {\n                \"original\": \"Brostrom\",\n                \"replacement\": \"Intermediate\"\n            },\n            {\n                \"original\": \"Afra pool\",\n                \"replacement\": \"AFRA\"\n            },\n            {\n                \"original\": \"Maersk Tankers City Pool\",\n                \"replacement\": \"CITY\"\n            },\n            {\n                \"original\": \"Maersk Tankers Flexi Pool\",\n                \"replacement\": \"FLEXI\"\n            }\n        ]\n    }"
+                    }
+                ]
+                },
+                "responses": [],
+                "displayName": "PoolPartners",
+                "method": "POST",
+                "urlTemplate": "/poolpartners"
+            },
+            "name": "[concat(parameters('ApimServiceName'), '/public-website-content/poolpartners')]",
+            "type": "Microsoft.ApiManagement/service/apis/operations",
+            "apiVersion": "2019-01-01",
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service/apis', parameters('ApimServiceName'), 'public-website-content')]"
+            ]
+        },
+        {
+            "properties": {
+                "value": "<policies>\r\n\t<inbound>\r\n\t\t<base />\r\n\t\t<set-backend-service id=\"apim-generated-policy\" backend-id=\"LogicApp_mt-d-eun-apim-hgw-web-pool-data-log__be719da55581c733674683130073cdc1\" />\r\n\t\t<set-method id=\"apim-generated-policy\">POST</set-method>\r\n\t\t<rewrite-uri id=\"apim-generated-policy\" template=\"/manual/paths/invoke/?api-version=2016-06-01&amp;sp=/triggers/manual/run&amp;sv=1.0&amp;sig={{public-website-content_poolpartners_5fd32410b164f2f181a23424}}\" />\r\n\t\t<set-header id=\"apim-generated-policy\" name=\"Ocp-Apim-Subscription-Key\" exists-action=\"delete\" />\r\n\t</inbound>\r\n\t<backend>\r\n\t\t<base />\r\n\t</backend>\r\n\t<outbound>\r\n\t\t<base />\r\n\t</outbound>\r\n\t<on-error>\r\n\t\t<base />\r\n\t</on-error>\r\n</policies>",
+                "format": "rawxml"
+            },
+            "name": "[concat(parameters('ApimServiceName'), '/public-website-content/poolpartners/policy')]",
+            "type": "Microsoft.ApiManagement/service/apis/operations/policies",
+            "apiVersion": "2019-01-01",
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('ApimServiceName'), 'public-website-content', 'poolpartners')]"
+            ]
+        }
+    ]
+}

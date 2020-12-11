@@ -13,6 +13,27 @@
           },
           "KeyvaultName": {
             "value": "mt-t-eun-ipaas-kv.vault.azure.net"
+          },
+          "Keyvault_rg": {
+            "value": "mt-t-eun-ipaas-apim-rg"
+          },
+          "workflows_mt_x_eun_apim_hgw_web_fleet_log_name": {
+            "value": "mt-t-eun-apim-hgw-web-fleet-log"
+          },
+          "workflows_mt_x_eun_apim_hgw_web_fleet_log_rg": {
+            "value": "mt-t-eun-ipaas-imos-rg"
+          },
+          "workflows_mt_x_eun_apim_hgw_web_fleet_log_uri": {
+            "value": "https://prod-08.northeurope.logic.azure.com/workflows/74e21d7401c34748b0cbb305cb7225e6/triggers"
+          },
+          "workflows_mt_x_eun_apim_hgw_web_pool_data_log_name": {
+            "value": "mt-t-eun-apim-hgw-web-fleet-log"
+          },
+          "workflows_mt_x_eun_apim_hgw_web_pool_data_log_rg": {
+            "value": "mt-t-eun-ipaas-bi-rg"
+          },
+          "workflows_mt_x_eun_apim_hgw_web_pool_data_log_uri": {
+            "value": "https://prod-44.northeurope.logic.azure.com/workflows/46b9677620cc454db7614bc494029a4c/triggers"
           }
     }
 }

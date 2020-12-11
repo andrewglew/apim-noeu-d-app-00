@@ -1,0 +1,51 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "ApimServiceName": {
+            "type": "string"
+        },
+        "workflows_mt_x_eun_apim_hgw_web_fleet_log_name": {
+            "type": "string"
+        },
+        "workflows_mt_x_eun_apim_hgw_web_fleet_log_rg": {
+            "type": "string"
+        },
+        "workflows_mt_x_eun_apim_hgw_web_fleet_log_uri": {
+            "type": "string"
+        },
+        "workflows_mt_x_eun_apim_hgw_web_pool_data_log_name": {
+            "type": "string"
+        },
+        "workflows_mt_x_eun_apim_hgw_web_pool_data_log_rg": {
+            "type": "string"
+        },
+        "workflows_mt_x_eun_apim_hgw_web_pool_data_log_uri": {
+            "type": "string"  
+        }
+    },
+    "resources": [
+      {
+        "properties": {
+          "description": "[parameters('workflows_mt_x_eun_apim_hgw_web_fleet_log_name')]",
+          "resourceId": "[concat('https://management.azure.com/subscriptions/',subscription().subscriptionId,'/resourceGroups/',parameters('workflows_mt_x_eun_apim_hgw_web_fleet_log_rg'),'/providers/Microsoft.Logic/workflows/',parameters('workflows_mt_x_eun_apim_hgw_web_fleet_log_name'))]",
+          "url": "[parameters('workflows_mt_x_eun_apim_hgw_web_fleet_log_uri')]",
+          "protocol": "http"
+        },
+        "name": "[concat(parameters('ApimServiceName'), '/LogicApp_mt-d-eun-apim-hgw-web-fleet-log_mt-d_51bfab6bac9075998b127a4a1b9c54b0')]",
+        "type": "Microsoft.ApiManagement/service/backends",
+        "apiVersion": "2019-01-01"
+      },
+      {
+        "properties": {
+          "description": "[parameters('workflows_mt_x_eun_apim_hgw_web_pool_data_log_name')]",
+          "resourceId": "[concat('https://management.azure.com/subscriptions/',subscription().subscriptionId,'/resourceGroups/',parameters('workflows_mt_x_eun_apim_hgw_web_pool_data_log_rg'),'/providers/Microsoft.Logic/workflows/',parameters('workflows_mt_x_eun_apim_hgw_web_pool_data_log_name'))]",
+          "url": "[parameters('workflows_mt_x_eun_apim_hgw_web_pool_data_log_uri')]",
+          "protocol": "http"
+        },
+        "name": "[concat(parameters('ApimServiceName'), '/LogicApp_mt-d-eun-apim-hgw-web-pool-data-log__be719da55581c733674683130073cdc1')]",
+        "type": "Microsoft.ApiManagement/service/backends",
+        "apiVersion": "2019-01-01"
+      }
+    ]
+  }
