@@ -4,6 +4,18 @@
     "parameters": {
         "ApimServiceName": {
             "type": "string"
+        },
+        "workflows_mt_x_eun_apim_hgw_web_fleet_log_name": {
+            "type": "string"
+        },
+        "workflows_mt_x_eun_apim_hgw_web_fleet_log_rg": {
+            "type": "string"
+        },
+        "workflows_mt_x_eun_apim_hgw_web_pool_data_log_name": {
+            "type": "string"
+        },
+        "workflows_mt_x_eun_apim_hgw_web_pool_data_log_rg": {
+            "type": "string"
         }
     },
     "resources": [
@@ -67,7 +79,7 @@
             },
             {
             "properties": {
-                "value": "<policies>\r\n\t<inbound>\r\n\t\t<base />\r\n\t\t<set-backend-service id=\"apim-generated-policy\" backend-id=\"LogicApp_mt-d-eun-apim-hgw-web-fleet-log_mt-d_51bfab6bac9075998b127a4a1b9c54b0\" />\r\n\t\t<set-method id=\"apim-generated-policy\">POST</set-method>\r\n\t\t<rewrite-uri id=\"apim-generated-policy\" template=\"/manual/paths/invoke/?api-version=2016-06-01&amp;sp=/triggers/manual/run&amp;sv=1.0&amp;sig={{public-website-content_fleet_5fd32316987d5a5e2b62a05d}}\" />\r\n\t\t<set-header id=\"apim-generated-policy\" name=\"Ocp-Apim-Subscription-Key\" exists-action=\"delete\" />\r\n\t</inbound>\r\n\t<backend>\r\n\t\t<base />\r\n\t</backend>\r\n\t<outbound>\r\n\t\t<base />\r\n\t</outbound>\r\n\t<on-error>\r\n\t\t<base />\r\n\t</on-error>\r\n</policies>",
+                "value": "[concat('<policies>\r\n\t<inbound>\r\n\t\t<base />\r\n\t\t<set-backend-service id=\"apim-generated-policy\" backend-id=\"','LogicApp_',parameters('workflows_mt_x_eun_apim_hgw_web_pool_data_log_name'),'_',parameters('workflows_mt_x_eun_apim_hgw_web_pool_data_log_rg'),'\" />\r\n\t\t<set-method id=\"apim-generated-policy\">POST</set-method>\r\n\t\t<rewrite-uri id=\"apim-generated-policy\" template=\"/manual/paths/invoke/?api-version=2016-06-01&amp;sp=/triggers/manual/run&amp;sv=1.0&amp;sig={{public-website-content_fleet_5fd32316987d5a5e2b62a05d}}\" />\r\n\t\t<set-header id=\"apim-generated-policy\" name=\"Ocp-Apim-Subscription-Key\" exists-action=\"delete\" />\r\n\t</inbound>\r\n\t<backend>\r\n\t\t<base />\r\n\t</backend>\r\n\t<outbound>\r\n\t\t<base />\r\n\t</outbound>\r\n\t<on-error>\r\n\t\t<base />\r\n\t</on-error>\r\n</policies>')]",
                 "format": "rawxml"
             },
             "name": "[concat(parameters('ApimServiceName'), '/public-website-content/fleet/policy')]",
@@ -104,9 +116,10 @@
                 "[resourceId('Microsoft.ApiManagement/service/apis', parameters('ApimServiceName'), 'public-website-content')]"
             ]
         },
+
         {
             "properties": {
-                "value": "<policies>\r\n\t<inbound>\r\n\t\t<base />\r\n\t\t<set-backend-service id=\"apim-generated-policy\" backend-id=\"LogicApp_mt-d-eun-apim-hgw-web-pool-data-log__be719da55581c733674683130073cdc1\" />\r\n\t\t<set-method id=\"apim-generated-policy\">POST</set-method>\r\n\t\t<rewrite-uri id=\"apim-generated-policy\" template=\"/manual/paths/invoke/?api-version=2016-06-01&amp;sp=/triggers/manual/run&amp;sv=1.0&amp;sig={{public-website-content_poolpartners_5fd32410b164f2f181a23424}}\" />\r\n\t\t<set-header id=\"apim-generated-policy\" name=\"Ocp-Apim-Subscription-Key\" exists-action=\"delete\" />\r\n\t</inbound>\r\n\t<backend>\r\n\t\t<base />\r\n\t</backend>\r\n\t<outbound>\r\n\t\t<base />\r\n\t</outbound>\r\n\t<on-error>\r\n\t\t<base />\r\n\t</on-error>\r\n</policies>",
+                "value": "[concat('<policies>\r\n\t<inbound>\r\n\t\t<base />\r\n\t\t<set-backend-service id=\"apim-generated-policy\" backend-id=\"','/LogicApp_',parameters('workflows_mt_x_eun_apim_hgw_web_pool_data_log_name'),'_',parameters('workflows_mt_x_eun_apim_hgw_web_pool_data_log_rg'),'\" />\r\n\t\t<set-method id=\"apim-generated-policy\">POST</set-method>\r\n\t\t<rewrite-uri id=\"apim-generated-policy\" template=\"/manual/paths/invoke/?api-version=2016-06-01&amp;sp=/triggers/manual/run&amp;sv=1.0&amp;sig={{public-website-content_poolpartners_5fd32410b164f2f181a23424}}\" />\r\n\t\t<set-header id=\"apim-generated-policy\" name=\"Ocp-Apim-Subscription-Key\" exists-action=\"delete\" />\r\n\t</inbound>\r\n\t<backend>\r\n\t\t<base />\r\n\t</backend>\r\n\t<outbound>\r\n\t\t<base />\r\n\t</outbound>\r\n\t<on-error>\r\n\t\t<base />\r\n\t</on-error>\r\n</policies>')]",
                 "format": "rawxml"
             },
             "name": "[concat(parameters('ApimServiceName'), '/public-website-content/poolpartners/policy')]",

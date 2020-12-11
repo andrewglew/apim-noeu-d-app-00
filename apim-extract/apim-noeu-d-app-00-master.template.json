@@ -230,6 +230,18 @@
           },
           "KeyvaultName": {
             "value": "[parameters('KeyvaultName')]"
+          },
+          "workflows_mt_x_eun_apim_hgw_web_fleet_log_name": {
+            "value": "[parameters('workflows_mt_x_eun_apim_hgw_web_fleet_log_name')]"
+          },
+          "workflows_mt_x_eun_apim_hgw_web_fleet_log_rg": {
+            "value": "[parameters('workflows_mt_x_eun_apim_hgw_web_fleet_log_rg')]"
+          },
+          "workflows_mt_x_eun_apim_hgw_web_pool_data_log_name": {
+            "value": "[parameters('workflows_mt_x_eun_apim_hgw_web_pool_data_log_name')]"
+          },
+          "workflows_mt_x_eun_apim_hgw_web_pool_data_log_rg": {
+            "value": "[parameters('workflows_mt_x_eun_apim_hgw_web_pool_data_log_rg')]"
           }
         }
       },
