@@ -75,7 +75,7 @@
       }
     },
     "appInsightsName": {
-      "defaultValue": "ai-noeu-d-app-00A",
+      "defaultValue": "ai-noeu-d-app-00",
       "type": "String",
       "metadata": {
         "description": "Logger used"

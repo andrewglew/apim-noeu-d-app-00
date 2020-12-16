@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
     "ApimServiceName": {
-      "value": "apim-noeu-t-app-00A"
+      "value": "apim-noeu-t-app-00"
     },
     "LinkedTemplatesBaseUrl": {
       "value": "https://raw.githubusercontent.com/andrewglew/apim-noeu-d-app-00/master/apim-extract"
@@ -36,7 +36,7 @@
       "value": "https://prod-44.northeurope.logic.azure.com/workflows/46b9677620cc454db7614bc494029a4c/triggers"
     },
     "appInsightsName": {
-      "value": "ai-noeu-t-app-00A"
+      "value": "ai-noeu-t-apim-00"
     }
   }
 }

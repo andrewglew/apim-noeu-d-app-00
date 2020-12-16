@@ -249,32 +249,32 @@
                 "percentage": 100.0
                 },
                 "frontend": {
-                "request": {
-                    "headers": [],
-                    "body": {
-                    "bytes": 64
+                    "request": {
+                        "headers": [],
+                        "body": {
+                        "bytes": 64
+                        }
+                    },
+                    "response": {
+                        "headers": [],
+                        "body": {
+                        "bytes": 64
+                        }
                     }
-                },
-                "response": {
-                    "headers": [],
-                    "body": {
-                    "bytes": 64
-                    }
-                }
                 },
                 "backend": {
-                "request": {
-                    "headers": [],
-                    "body": {
-                    "bytes": 64
+                    "request": {
+                        "headers": [],
+                        "body": {
+                        "bytes": 64
+                        }
+                    },
+                    "response": {
+                        "headers": [],
+                        "body": {
+                        "bytes": 64
+                        }
                     }
-                },
-                "response": {
-                    "headers": [],
-                    "body": {
-                    "bytes": 64
-                    }
-                }
                 }
             },
             "name": "[concat(parameters('ApimServiceName'), '/vpsolutions/applicationinsights')]",
