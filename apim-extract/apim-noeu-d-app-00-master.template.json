@@ -73,6 +73,13 @@
       "metadata": {
         "description": "Base uri of pool data Logic App HTTP trigger"
       }
+    },
+    "appInsightsName": {
+      "defaultValue": "ai-noeu-d-app-00A",
+      "type": "String",
+      "metadata": {
+        "description": "Logger used"
+      }
     }
   },
   "resources": [
@@ -240,6 +247,9 @@
           },
           "workflows_mt_x_eun_apim_hgw_web_pool_data_log_rg": {
             "value": "[parameters('workflows_mt_x_eun_apim_hgw_web_pool_data_log_rg')]"
+          },
+          "appInsightsName": {
+            "value": "[parameters('appInsightsName')]"
           }
         }
       },

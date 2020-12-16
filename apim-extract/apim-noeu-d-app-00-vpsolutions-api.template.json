@@ -7,6 +7,9 @@
         },
         "KeyvaultName": {
             "type": "string"
+        },
+        "appInsightsName": {
+            "type": "string"
         }
     },
     "resources": [
@@ -236,6 +239,50 @@
             "dependsOn": [
                 "[resourceId('Microsoft.ApiManagement/service/apis', parameters('ApimServiceName'), 'vpsolutions')]"
             ]
-        }
+        },
+        {
+            "properties": {
+                "alwaysLog": "allErrors",
+                "loggerId": "[concat('/subscriptions/',subscription().subscriptionId,'/resourceGroups/',resourceGroup().name,'/providers/Microsoft.ApiManagement/service/',parameters('ApimServiceName'),'/loggers/',parameters('appInsightsName'))]",
+                "sampling": {
+                "samplingType": "fixed",
+                "percentage": 100.0
+                },
+                "frontend": {
+                "request": {
+                    "headers": [],
+                    "body": {
+                    "bytes": 64
+                    }
+                },
+                "response": {
+                    "headers": [],
+                    "body": {
+                    "bytes": 64
+                    }
+                }
+                },
+                "backend": {
+                "request": {
+                    "headers": [],
+                    "body": {
+                    "bytes": 64
+                    }
+                },
+                "response": {
+                    "headers": [],
+                    "body": {
+                    "bytes": 64
+                    }
+                }
+                }
+            },
+            "name": "[concat(parameters('ApimServiceName'), '/vpsolutions/applicationinsights')]",
+            "type": "Microsoft.ApiManagement/service/apis/diagnostics",
+            "apiVersion": "2019-01-01",
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service/apis', parameters('ApimServiceName'), 'vpsolutions')]"
+            ]
+            }
     ]
 }

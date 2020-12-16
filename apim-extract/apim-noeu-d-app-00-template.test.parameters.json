@@ -34,6 +34,9 @@
     },
     "workflows_mt_x_eun_apim_hgw_web_pool_data_log_uri": {
       "value": "https://prod-44.northeurope.logic.azure.com/workflows/46b9677620cc454db7614bc494029a4c/triggers"
+    },
+    "appInsightsName": {
+      "value": "ai-noeu-t-app-00A"
     }
   }
 }
