@@ -9,9 +9,23 @@
     - Policies are applied in the order of their appearance, from the top down.
 -->
 <policies>
-	<inbound />
-	<backend>
-		<forward-request />
-	</backend>
-	<outbound />
+    <inbound>
+        <ip-filter action="allow">
+            <address-range from="147.243.0.0" to="147.243.255.255" />
+            <address>40.113.12.95</address>
+            <address>52.178.165.215</address>
+            <address>52.178.166.21</address>
+            <address>40.112.92.104</address>
+            <address>40.112.95.216</address>
+            <address>40.113.4.18</address>
+            <address>40.113.3.202</address>
+            <address>40.113.1.181</address>
+            <address>13.91.254.72</address>
+        </ip-filter>
+    </inbound>
+    <backend>
+        <forward-request />
+    </backend>
+    <outbound />
+    <on-error />
 </policies>
