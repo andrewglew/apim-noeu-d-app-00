@@ -8,6 +8,18 @@
         "description": "Name of the API Management"
       }
     },
+    "_artifactsLocation" : {
+      "type": "string",
+        "metadata": {
+        "description": "Base URL of the storageaccount used"
+      }
+    },
+    "_artifactsLocationSasToken" :{
+      "type": "securestring",
+        "metadata": {
+        "description": "Temporary SasToken for the storageaccount used"
+      }
+    },
     "LinkedTemplatesBaseUrl": {
       "type": "string",
       "metadata": {
@@ -82,12 +94,22 @@
       }
     }
   },
+  "variables": {
+    "linkedTemplates": {
+        "namedValues": "[concat(parameters('_artifactsLocation'), 'linked-templates/apim-noeu-d-app-00-namedValues.template.json', parameters('_artifactsLocationSasToken'))]",
+        "globalServicePolicy": "[concat(parameters('_artifactsLocation'), 'linked-templates/apim-noeu-d-app-00-globalServicePolicy.template.json', parameters('_artifactsLocationSasToken'))]",
+         "products": "[concat(parameters('_artifactsLocation'), 'linked-templates/apim-noeu-d-app-00-products.template.json', parameters('_artifactsLocationSasToken'))]",
+        "shared": "[concat(parameters('_artifactsLocation'), 'linked-templates/apim-noeu-d-app-00-shared.template.json', parameters('_artifactsLocationSasToken'))]",
+        "backends": "[concat(parameters('_artifactsLocation'), 'linked-templates/apim-noeu-d-app-00-backends.template.json', parameters('_artifactsLocationSasToken'))]",
+        "apis": "[concat(parameters('_artifactsLocation'), 'linked-templates/apim-noeu-d-app-00-apis.template.json', parameters('_artifactsLocationSasToken'))]"
+    }
+  },
   "resources": [
     {
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[concat(parameters('LinkedTemplatesBaseUrl'), '/apim-noeu-d-app-00-namedValues.template.json')]",
+          "uri": "[variables('linkedTemplates').namedValues]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -113,7 +135,7 @@
         }
       },
 
-      "name": "namedValuesTemplate",
+      "name": "v",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2018-05-01",
       "dependsOn": []
@@ -122,7 +144,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[concat(parameters('LinkedTemplatesBaseUrl'), '/apim-noeu-d-app-00-globalServicePolicy.template.json')]",
+          "uri": "[variables('linkedTemplates').globalServicePolicy]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -143,7 +165,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[concat(parameters('LinkedTemplatesBaseUrl'), '/apim-noeu-d-app-00-products.template.json')]",
+          "uri": "[variables('linkedTemplates').products]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -164,7 +186,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[concat(parameters('LinkedTemplatesBaseUrl'), '/apim-noeu-d-app-00-shared.template.json')]",
+          "uri": "[variables('linkedTemplates').shared]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -182,7 +204,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[concat(parameters('LinkedTemplatesBaseUrl'), '/apim-noeu-d-app-00-backends.template.json')]",
+          "uri": "[variables('linkedTemplates').backends]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -220,7 +242,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[concat(parameters('LinkedTemplatesBaseUrl'), '/apim-noeu-d-app-00-apis.template.json')]",
+          "uri": "[variables('linkedTemplates').apis]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -229,6 +251,12 @@
           },
           "LinkedTemplatesBaseUrl": {
             "value": "[parameters('LinkedTemplatesBaseUrl')]"
+          },
+          "_artifactsLocation" : {
+            "value": "[parameters('_artifactsLocation')]"
+          },
+          "_artifactsLocationSasToken" :{
+            "value": "[parameters('_artifactsLocationSasToken')]"
           },
           "PolicyXMLBaseUrl": {
             "value": "[parameters('PolicyXMLBaseUrl')]"

@@ -8,6 +8,12 @@
     "LinkedTemplatesBaseUrl": {
       "value": "https://raw.githubusercontent.com/andrewglew/apim-noeu-d-app-00/master/apim-extract"
     },
+    "_artifactsLocation" : {
+      "value": ""
+    },
+    "_artifactsLocationSasToken" :{
+      "value": ""
+    },
     "PolicyXMLBaseUrl": {
       "value": "https://raw.githubusercontent.com/andrewglew/apim-noeu-d-app-00/master/apim-extract/policies"
     },

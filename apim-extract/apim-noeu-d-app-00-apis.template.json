@@ -8,6 +8,12 @@
     "LinkedTemplatesBaseUrl": {
       "type": "string"
     },
+    "_artifactsLocation" : {
+      "type": "string"
+    },
+    "_artifactsLocationSasToken" :{
+     "type": "string"
+    },
     "PolicyXMLBaseUrl": {
       "type": "string"
     },
@@ -30,12 +36,19 @@
       "type": "string"
     }
   },
+"variables": {
+    "linkedTemplates": {
+        "echoApi": "[concat(parameters('_artifactsLocation'), 'linked-templates/apim-noeu-d-app-00-echo-api-api.template.json', parameters('_artifactsLocationSasToken'))]",
+        "vpsolutions": "[concat(parameters('_artifactsLocation'), 'linked-templates/apim-noeu-d-app-00-vpsolutions-api.template.json', parameters('_artifactsLocationSasToken'))]",
+        "mtwebsite": "[concat(parameters('_artifactsLocation'), 'linked-templates/apim-noeu-d-app-00-mt-website-api.template.json', parameters('_artifactsLocationSasToken'))]"
+    }
+  },
   "resources": [
     {
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[concat(parameters('LinkedTemplatesBaseUrl'), '/apim-noeu-d-app-00-echo-api-api.template.json')]",
+          "uri": "[variables('linkedTemplates').echoApi]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -56,7 +69,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[concat(parameters('LinkedTemplatesBaseUrl'), '/apim-noeu-d-app-00-vpsolutions-api.template.json')]",
+          "uri": "[variables('linkedTemplates').vpsolutions]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -80,7 +93,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[concat(parameters('LinkedTemplatesBaseUrl'), '/apim-noeu-d-app-00-mt-website-api.template.json')]",
+          "uri": "[variables('linkedTemplates').mtwebsite]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
