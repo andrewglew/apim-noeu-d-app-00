@@ -38,9 +38,9 @@
   },
 "variables": {
     "linkedTemplates": {
-        "echoApi": "[concat(parameters('_artifactsLocation'), 'linked-templates/apim-noeu-d-app-00-echo-api-api.template.json', parameters('_artifactsLocationSasToken'))]",
-        "vpsolutions": "[concat(parameters('_artifactsLocation'), 'linked-templates/apim-noeu-d-app-00-vpsolutions-api.template.json', parameters('_artifactsLocationSasToken'))]",
-        "mtwebsite": "[concat(parameters('_artifactsLocation'), 'linked-templates/apim-noeu-d-app-00-mt-website-api.template.json', parameters('_artifactsLocationSasToken'))]"
+        "echoApi": "[concat(parameters('_artifactsLocation'), 'linked-templates/apim-noeu-d-app-00-echo-api-api.template.json','?', parameters('_artifactsLocationSasToken'))]",
+        "vpsolutions": "[concat(parameters('_artifactsLocation'), 'linked-templates/apim-noeu-d-app-00-vpsolutions-api.template.json','?', parameters('_artifactsLocationSasToken'))]",
+        "mtwebsite": "[concat(parameters('_artifactsLocation'), 'linked-templates/apim-noeu-d-app-00-mt-website-api.template.json','?', parameters('_artifactsLocationSasToken'))]"
     }
   },
   "resources": [
