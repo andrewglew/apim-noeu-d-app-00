@@ -84,7 +84,7 @@
   },
   "variables": {
     "linkedTemplates": {
-        "namedValues": "[concat(parameters('_artifactsLocation'), 'linked-templates/apim-noeu-d-app-00-namedValues.template.json?',parameters('_artifactsLocationSasToken'))]",
+        "namedValues": "[concat(parameters('_artifactsLocation'), 'linked-templates/apim-noeu-d-app-00-namedValues.template.json',parameters('_artifactsLocationSasToken'))]",
         "globalServicePolicy": "[concat(parameters('_artifactsLocation'), 'linked-templates/apim-noeu-d-app-00-globalServicePolicy.template.json', parameters('_artifactsLocationSasToken'))]",
          "products": "[concat(parameters('_artifactsLocation'), 'linked-templates/apim-noeu-d-app-00-products.template.json', parameters('_artifactsLocationSasToken'))]",
         "shared": "[concat(parameters('_artifactsLocation'), 'linked-templates/apim-noeu-d-app-00-shared.template.json',parameters('_artifactsLocationSasToken'))]",
