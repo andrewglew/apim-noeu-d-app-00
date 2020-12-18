@@ -68,8 +68,8 @@
         },
         {
             "properties": {
-                "value": "[concat(parameters('PolicyXMLBaseUrl'), '/echo-api-create-resource-operationPolicy.xml')]",
-                "format": "rawxml-link"
+                "value": "<policies>\r\n\t<inbound>\r\n\t\t<base />\r\n\t\t<json-to-xml apply=\"always\" consider-accept-header=\"false\" />\r\n\t</inbound>\r\n\t<backend>\r\n\t\t<base />\r\n\t</backend>\r\n\t<outbound>\r\n\t\t<base />\r\n\t</outbound>\r\n</policies>",
+                "format": "rawxml"
             },
             "name": "[concat(parameters('ApimServiceName'), '/echo-api/create-resource/policy')]",
             "type": "Microsoft.ApiManagement/service/apis/operations/policies",
@@ -161,8 +161,8 @@
         },
         {
             "properties": {
-            "value": "[concat(parameters('PolicyXMLBaseUrl'), '/echo-api-retrieve-header-only-operationPolicy.xml')]",
-            "format": "rawxml-link"
+                "value": "<policies>\r\n\t<inbound>\r\n\t\t<base />\r\n\t</inbound>\r\n\t<backend>\r\n\t\t<base />\r\n\t</backend>\r\n\t<outbound>\r\n\t\t<base />\r\n\t\t<set-header name=\"X-My-Sample\" exists-action=\"override\">\r\n\t\t\t<value>This is a sample</value>\r\n\t\t\t<!-- for multiple headers with the same name add additional value elements -->\r\n\t\t</set-header>\r\n\t\t<jsonp callback-parameter-name=\"ProcessResponse\" />\r\n\t</outbound>\r\n</policies>",
+                "format": "rawxml"
             },
             "name": "[concat(parameters('ApimServiceName'), '/echo-api/retrieve-header-only/policy')]",
             "type": "Microsoft.ApiManagement/service/apis/operations/policies",
@@ -264,8 +264,8 @@
         },
         {
             "properties": {
-                "value": "[concat(parameters('PolicyXMLBaseUrl'), '/echo-api-retrieve-resource-cached-operationPolicy.xml')]",
-                "format": "rawxml-link"
+                "value": "<policies>\r\n\t<inbound>\r\n\t\t<base />\r\n\t\t<cache-lookup vary-by-developer=\"false\" vary-by-developer-groups=\"false\">\r\n\t\t\t<vary-by-header>Accept</vary-by-header>\r\n\t\t\t<vary-by-header>Accept-Charset</vary-by-header>\r\n\t\t</cache-lookup>\r\n\t\t<rewrite-uri template=\"/resource\" />\r\n\t</inbound>\r\n\t<backend>\r\n\t\t<base />\r\n\t</backend>\r\n\t<outbound>\r\n\t\t<base />\r\n\t\t<cache-store duration=\"3600\" />\r\n\t</outbound>\r\n</policies>",
+                "format": "rawxml"
             },
             "name": "[concat(parameters('ApimServiceName'), '/echo-api/retrieve-resource-cached/policy')]",
             "type": "Microsoft.ApiManagement/service/apis/operations/policies",

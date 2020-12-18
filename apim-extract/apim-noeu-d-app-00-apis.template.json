@@ -5,9 +5,6 @@
     "ApimServiceName": {
       "type": "string"
     },
-    "LinkedTemplatesBaseUrl": {
-      "type": "string"
-    },
     "_artifactsLocation" : {
       "type": "string"
     },

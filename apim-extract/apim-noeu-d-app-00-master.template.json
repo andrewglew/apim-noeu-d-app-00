@@ -20,12 +20,6 @@
         "description": "Temporary SasToken for the storageaccount used"
       }
     },
-    "LinkedTemplatesBaseUrl": {
-      "type": "string",
-      "metadata": {
-        "description": "Base URL of the repository that contains the generated templates"
-      }
-    },
     "PolicyXMLBaseUrl": {
       "type": "string",
       "metadata": {
@@ -248,9 +242,6 @@
         "parameters": {
           "ApimServiceName": {
             "value": "[parameters('ApimServiceName')]"
-          },
-          "LinkedTemplatesBaseUrl": {
-            "value": "[parameters('LinkedTemplatesBaseUrl')]"
           },
           "_artifactsLocation" : {
             "value": "[parameters('_artifactsLocation')]"

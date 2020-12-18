@@ -12,8 +12,8 @@
   "resources": [
     {
       "properties": {
-        "value": "[concat(parameters('PolicyXMLBaseUrl'), '/globalServicePolicy.xml')]",
-        "format": "rawxml-link"
+        "value": "<policies>\r\n\t<inbound>\r\n\t\t<ip-filter action=\"allow\">\r\n\t\t\t<address>40.113.12.95</address>\r\n\t\t\t<address>52.178.165.215</address>\r\n\t\t\t<address>52.178.166.21</address>\r\n\t\t\t<address>40.112.92.104</address>\r\n\t\t\t<address>40.112.95.216</address>\r\n\t\t\t<address>40.113.4.18</address>\r\n\t\t\t<address>40.113.3.202</address>\r\n\t\t\t<address>40.113.1.181</address>\r\n\t\t\t<address>13.91.254.72</address>\r\n\t\t\t<address-range from=\"147.243.0.0\" to=\"147.243.255.255\" />\r\n\t\t</ip-filter>\r\n\t</inbound>\r\n\t<backend>\r\n\t\t<forward-request />\r\n\t</backend>\r\n\t<outbound />\r\n\t<on-error />\r\n</policies>",
+        "format": "rawxml"
       },
       "name": "[concat(parameters('ApimServiceName'), '/policy')]",
       "type": "Microsoft.ApiManagement/service/policies",
