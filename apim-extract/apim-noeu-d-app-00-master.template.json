@@ -19,14 +19,115 @@
         "metadata": {
         "description": "Temporary SasToken for the storageaccount used"
       }
+    },
+    "KeyvaultName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of Keyvault used"
+      }
+    },
+    "Keyvault_rg": {
+      "type": "string",
+      "metadata": {
+        "description": "Resource Group where Keyvault is used"
+      }
+    },
+    "workflows_mt_x_eun_apim_hgw_web_fleet_log_name": {
+      "defaultValue": "mt-d-eun-apim-hgw-web-fleet-log",
+      "type": "String",
+      "metadata": {
+        "description": "Name of web fleet logic app resource"
+      }
+    },
+    "workflows_mt_x_eun_apim_hgw_web_fleet_log_rg": {
+      "defaultValue": "mt-d-eun-ipaas-imos-rg",
+      "type": "String",
+      "metadata": {
+        "description": "Name of web fleet logic app resource group"
+      }
+    },
+    "workflows_mt_x_eun_apim_hgw_web_fleet_log_uri": {
+      "defaultValue": "https://prod-01.northeurope.logic.azure.com/workflows/1d9462b988b44a469c8aa34186e28e83/triggers",
+      "type": "String",
+      "metadata": {
+        "description": "Base uri of pool data Logic App HTTP trigger"
+      }
+    },
+    "workflows_mt_x_eun_apim_hgw_web_pool_data_log_name": {
+      "defaultValue": "mt-d-eun-apim-hgw-web-fleet-log",
+      "type": "String",
+      "metadata": {
+        "description": "Name of pool data logic app resource"
+      }
+    },
+    "workflows_mt_x_eun_apim_hgw_web_pool_data_log_rg": {
+      "defaultValue": "mt-d-eun-ipaas-bi-rg",
+      "type": "String",
+      "metadata": {
+        "description": "Name of pool data logic app resource group"
+      }
+    },
+    "workflows_mt_x_eun_apim_hgw_web_pool_data_log_uri": {
+      "defaultValue": "https://prod-22.northeurope.logic.azure.com/workflows/20ee39e33cbc497cb38a23759310d6c8/triggers",
+      "type": "String",
+      "metadata": {
+        "description": "Base uri of pool data Logic App HTTP trigger"
+      }
+    },
+    "appInsightsName": {
+      "defaultValue": "ai-noeu-d-app-00",
+      "type": "String",
+      "metadata": {
+        "description": "Logger used"
+      }
     }
   },
   "variables": {
     "linkedTemplates": {
-        "globalServicePolicy": "[concat(parameters('_artifactsLocation'), 'linked-templates/apim-noeu-d-app-00-globalServicePolicy.template.json', parameters('_artifactsLocationSasToken'))]"
+        "namedValues": "[concat(parameters('_artifactsLocation'), 'linked-templates/apim-noeu-d-app-00-namedValues.template.json',parameters('_artifactsLocationSasToken'))]",
+        "globalServicePolicy": "[concat(parameters('_artifactsLocation'), 'linked-templates/apim-noeu-d-app-00-globalServicePolicy.template.json', parameters('_artifactsLocationSasToken'))]",
+         "products": "[concat(parameters('_artifactsLocation'), 'linked-templates/apim-noeu-d-app-00-products.template.json', parameters('_artifactsLocationSasToken'))]",
+        "shared": "[concat(parameters('_artifactsLocation'), 'linked-templates/apim-noeu-d-app-00-shared.template.json',parameters('_artifactsLocationSasToken'))]",
+        "backends": "[concat(parameters('_artifactsLocation'), 'linked-templates/apim-noeu-d-app-00-backends.template.json',parameters('_artifactsLocationSasToken'))]",
+        "apis": "[concat(parameters('_artifactsLocation'), 'linked-templates/apim-noeu-d-app-00-apis.template.json',parameters('_artifactsLocationSasToken'))]"
     }
   },
   "resources": [
+    {
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[variables('linkedTemplates').namedValues]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "ApimServiceName": {
+            "value": "[parameters('ApimServiceName')]"
+          },
+          "workflows_mt_x_eun_apim_hgw_web_fleet_log_sig": {
+            "reference": {
+                "keyVault": {
+                    "id": "[resourceId(subscription().subscriptionId,  parameters('Keyvault_rg'), 'Microsoft.KeyVault/vaults', parameters('KeyvaultName'))]"
+                },
+                "secretName": "hgw-web-fleet-sig"
+            }
+          },
+          "workflows_mt_x_eun_apim_hgw_web_pool_data_log_sig": {
+            "reference": {
+              "keyVault": {
+                  "id": "[resourceId(subscription().subscriptionId,  parameters('Keyvault_rg'), 'Microsoft.KeyVault/vaults', parameters('KeyvaultName'))]"
+              },
+              "secretName": "hgw-web-pool-data-sig"
+            }
+          }
+        }
+      },
+
+      "name": "namedValuesTemplate",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2018-05-01",
+      "dependsOn": []
+    },
     {
       "properties": {
         "mode": "Incremental",
@@ -43,7 +144,129 @@
       "name": "globalServicePolicyTemplate",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2018-05-01",
+      "dependsOn": ["[resourceId('Microsoft.Resources/deployments', 'namedValuesTemplate')]"]
+    },
+    {
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[variables('linkedTemplates').products]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "ApimServiceName": {
+            "value": "[parameters('ApimServiceName')]"
+          }
+        }
+      },
+      "name": "productsTemplate",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2018-05-01",
+      "dependsOn": ["[resourceId('Microsoft.Resources/deployments', 'namedValuesTemplate')]"]
+    },
+    {
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[variables('linkedTemplates').shared]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "ApimServiceName": {
+            "value": "[parameters('ApimServiceName')]"
+          }
+        }
+      },
+      "name": "sharedTemplate",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2018-05-01",
       "dependsOn": []
+    },
+    {
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[variables('linkedTemplates').backends]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "ApimServiceName": {
+            "value": "[parameters('ApimServiceName')]"
+          },
+          "workflows_mt_x_eun_apim_hgw_web_fleet_log_name": {
+            "value": "[parameters('workflows_mt_x_eun_apim_hgw_web_fleet_log_name')]"
+          },
+          "workflows_mt_x_eun_apim_hgw_web_fleet_log_rg": {
+            "value": "[parameters('workflows_mt_x_eun_apim_hgw_web_fleet_log_rg')]"
+          },
+          "workflows_mt_x_eun_apim_hgw_web_fleet_log_uri": {
+            "value": "[parameters('workflows_mt_x_eun_apim_hgw_web_fleet_log_uri')]"
+          },
+          "workflows_mt_x_eun_apim_hgw_web_pool_data_log_name": {
+            "value": "[parameters('workflows_mt_x_eun_apim_hgw_web_pool_data_log_name')]"
+          },
+          "workflows_mt_x_eun_apim_hgw_web_pool_data_log_rg": {
+            "value": "[parameters('workflows_mt_x_eun_apim_hgw_web_pool_data_log_rg')]"
+          },
+          "workflows_mt_x_eun_apim_hgw_web_pool_data_log_uri": {
+            "value": "[parameters('workflows_mt_x_eun_apim_hgw_web_pool_data_log_uri')]"  
+          }
+        }
+      },
+      "name": "backendsTemplate",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2018-05-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Resources/deployments', 'namedValuesTemplate')]"
+      ]
+    },
+    {
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[variables('linkedTemplates').apis]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "ApimServiceName": {
+            "value": "[parameters('ApimServiceName')]"
+          },
+          "_artifactsLocation" : {
+            "value": "[parameters('_artifactsLocation')]"
+          },
+          "_artifactsLocationSasToken" :{
+            "value": "[parameters('_artifactsLocationSasToken')]"
+          },
+          "KeyvaultName": {
+            "value": "[parameters('KeyvaultName')]"
+          },
+          "workflows_mt_x_eun_apim_hgw_web_fleet_log_name": {
+            "value": "[parameters('workflows_mt_x_eun_apim_hgw_web_fleet_log_name')]"
+          },
+          "workflows_mt_x_eun_apim_hgw_web_fleet_log_rg": {
+            "value": "[parameters('workflows_mt_x_eun_apim_hgw_web_fleet_log_rg')]"
+          },
+          "workflows_mt_x_eun_apim_hgw_web_pool_data_log_name": {
+            "value": "[parameters('workflows_mt_x_eun_apim_hgw_web_pool_data_log_name')]"
+          },
+          "workflows_mt_x_eun_apim_hgw_web_pool_data_log_rg": {
+            "value": "[parameters('workflows_mt_x_eun_apim_hgw_web_pool_data_log_rg')]"
+          },
+          "appInsightsName": {
+            "value": "[parameters('appInsightsName')]"
+          }
+        }
+      },
+      "name": "apisTemplate",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2018-05-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Resources/deployments', 'namedValuesTemplate')]",
+        "[resourceId('Microsoft.Resources/deployments', 'globalServicePolicyTemplate')]",
+        "[resourceId('Microsoft.Resources/deployments', 'productsTemplate')]",
+        "[resourceId('Microsoft.Resources/deployments', 'sharedTemplate')]",
+        "[resourceId('Microsoft.Resources/deployments', 'backendsTemplate')]"
+      ]
     }
   ]
 }
