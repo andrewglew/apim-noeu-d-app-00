@@ -20,12 +20,6 @@
         "description": "Temporary SasToken for the storageaccount used"
       }
     },
-    "PolicyXMLBaseUrl": {
-      "type": "string",
-      "metadata": {
-        "description": "Base URL of the repository that contains the generated policy files"
-      }
-    },
     "KeyvaultName": {
       "type": "string",
       "metadata": {
@@ -144,9 +138,6 @@
         "parameters": {
           "ApimServiceName": {
             "value": "[parameters('ApimServiceName')]"
-          },
-          "PolicyXMLBaseUrl": {
-            "value": "[parameters('PolicyXMLBaseUrl')]"
           }
         }
       },
@@ -165,9 +156,6 @@
         "parameters": {
           "ApimServiceName": {
             "value": "[parameters('ApimServiceName')]"
-          },
-          "PolicyXMLBaseUrl": {
-            "value": "[parameters('PolicyXMLBaseUrl')]"
           }
         }
       },
@@ -248,9 +236,6 @@
           },
           "_artifactsLocationSasToken" :{
             "value": "[parameters('_artifactsLocationSasToken')]"
-          },
-          "PolicyXMLBaseUrl": {
-            "value": "[parameters('PolicyXMLBaseUrl')]"
           },
           "KeyvaultName": {
             "value": "[parameters('KeyvaultName')]"

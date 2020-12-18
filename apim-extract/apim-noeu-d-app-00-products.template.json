@@ -4,9 +4,6 @@
   "parameters": {
     "ApimServiceName": {
       "type": "string"
-    },
-    "PolicyXMLBaseUrl": {
-      "type": "string"
     }
   },
   "resources": [
@@ -68,8 +65,8 @@
     },
     {
       "properties": {
-        "value": "[concat(parameters('PolicyXMLBaseUrl'), '/starter-productPolicy.xml')]",
-        "format": "rawxml-link"
+        "value": "<policies>\r\n\t<inbound>\r\n\t\t<rate-limit calls=\"5\" renewal-period=\"60\" />\r\n\t\t<quota calls=\"100\" renewal-period=\"604800\" />\r\n\t\t<base />\r\n\t</inbound>\r\n\t<backend>\r\n\t\t<base />\r\n\t</backend>\r\n\t<outbound>\r\n\t\t<base />\r\n\t</outbound>\r\n</policies>",
+        "format": "rawxml"
       },
       "name": "[concat(parameters('ApimServiceName'), '/starter/policy')]",
       "type": "Microsoft.ApiManagement/service/products/policies",
