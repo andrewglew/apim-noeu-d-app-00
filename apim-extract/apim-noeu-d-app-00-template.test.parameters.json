@@ -10,12 +10,6 @@
     },
     "_artifactsLocationSasToken" :{
       "value": "overriden"
-    },
-    "KeyvaultName": {
-      "value": "mt-t-eun-ipaas-kv"
-    },
-    "Keyvault_rg": {
-      "value": "mt-t-eun-ipaas-apim-rg"
     }
   }
 }

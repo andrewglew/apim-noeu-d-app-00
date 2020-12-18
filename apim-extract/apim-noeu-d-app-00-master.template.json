@@ -19,23 +19,11 @@
         "metadata": {
         "description": "Temporary SasToken for the storageaccount used"
       }
-    },
-    "KeyvaultName": {
-      "type": "string",
-      "metadata": {
-        "description": "Name of Keyvault used"
-      }
-    },
-    "Keyvault_rg": {
-      "type": "string",
-      "metadata": {
-        "description": "Resource Group where Keyvault is used"
-      }
     }
   },
   "variables": {
     "linkedTemplates": {
-        "namedValues": "[concat(parameters('_artifactsLocation'), 'linked-templates/apim-noeu-d-app-00-namedValues.template.json',parameters('_artifactsLocationSasToken'))]"
+        "globalServicePolicy": "[concat(parameters('_artifactsLocation'), 'linked-templates/apim-noeu-d-app-00-globalServicePolicy.template.json', parameters('_artifactsLocationSasToken'))]"
     }
   },
   "resources": [
@@ -43,32 +31,16 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[variables('linkedTemplates').namedValues]",
+          "uri": "[variables('linkedTemplates').globalServicePolicy]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
           "ApimServiceName": {
             "value": "[parameters('ApimServiceName')]"
-          },
-          "workflows_mt_x_eun_apim_hgw_web_fleet_log_sig": {
-            "reference": {
-                "keyVault": {
-                    "id": "[resourceId(subscription().subscriptionId,  parameters('Keyvault_rg'), 'Microsoft.KeyVault/vaults', parameters('KeyvaultName'))]"
-                },
-                "secretName": "hgw-web-fleet-sig"
-            }
-          },
-          "workflows_mt_x_eun_apim_hgw_web_pool_data_log_sig": {
-            "reference": {
-              "keyVault": {
-                  "id": "[resourceId(subscription().subscriptionId,  parameters('Keyvault_rg'), 'Microsoft.KeyVault/vaults', parameters('KeyvaultName'))]"
-              },
-              "secretName": "hgw-web-pool-data-sig"
-            }
           }
         }
       },
-      "name": "namedValuesTemplate",
+      "name": "globalServicePolicyTemplate",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2018-05-01",
       "dependsOn": []
